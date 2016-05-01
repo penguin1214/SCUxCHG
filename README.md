@@ -1,15 +1,5 @@
-川大二手
-介绍：本项目尝试通过移动端技术构建一个购物平台APP，帮助学生合理处理存在的二手物品，学生可以把二手物品发布到二手网站，然后有需求的学生进行联系购买，既节约又环保，促使学生养成不浪费的良好习惯。随着每年的升学和毕业，一方面毕业生急于处理自己大学几年来用过又没有损坏的物品，但是却不能及时找到好的处理办法另一方面有很多学生寻找物美价廉的二手物品又求购无门。所以就产生了川大二手这个项目。
- 
-基本要求:
-1实现用户注册与登录、发布二手商品信息、购买商品、最新商品展示、用户管理、商品信息管理、商品审核、留言管理、发布公告信息等基本功能。
-2要求设计APP界面
-                                
-加分项：
-1检查用户输入错误项进行提示
-2后台管理分页
-3联网
-4不要套用模板
+SCUxCHG
+---
 
 [ ] 用户注册登录
 [ ] 发布二手商品信息
@@ -20,3 +10,29 @@
 [ ] 商品审核
 [ ] 留言管理
 [ ] 发布公告信息
+[ ] 检查用户输入错误项进行提示
+[ ] 联网
+[ ] 后台管理分页
+
+### 项目进度
+
+> 2016.5.1
+
+- Client
+
+	- 学习Auto Layout	[demo][1]
+	- 学习Tab bar	[demo][2]
+	- 学习Navigation Controller	[demo][3]
+	- 学习block回调	
+	- 学习delegate模式	[demo][4]
+	- 学习使用Afnetworking发送请求	[demo][5]
+
+- Server
+
+	- 接收app端发送的GET、POST请求，目前可以接收请求，数据解析还未完成
+
+[1]: https://github.com/penguin-penpen/ALDemo
+[2]: https://github.com/penguin-penpen/TabDemo
+[3]: https://github.com/penguin-penpen/NavDemo
+[4]: https://github.com/penguin-penpen/pDelegateDemo
+[5]: https://github.com/penguin-penpen/loginDemo
