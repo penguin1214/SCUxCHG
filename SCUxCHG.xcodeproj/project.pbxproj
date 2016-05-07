@@ -11,6 +11,7 @@
 		2FB55B791CDE2DC400BF2177 /* HomeTabLeftTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB55B781CDE2DC400BF2177 /* HomeTabLeftTableViewCell.m */; };
 		2FB55B7C1CDE2DEB00BF2177 /* HomeTabRightTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB55B7B1CDE2DEB00BF2177 /* HomeTabRightTableViewCell.m */; };
 		2FB55B821CDE38DF00BF2177 /* HomeTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB55B811CDE38DF00BF2177 /* HomeTabController.m */; };
+		2FB55B8B1CDE419F00BF2177 /* CartTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB55B8A1CDE419F00BF2177 /* CartTabController.m */; };
 		2FBD58431CCBCB51005361B2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD58421CCBCB51005361B2 /* main.m */; };
 		2FBD58461CCBCB51005361B2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD58451CCBCB51005361B2 /* AppDelegate.m */; };
 		2FBD58511CCBCB51005361B2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FBD58501CCBCB51005361B2 /* Images.xcassets */; };
@@ -35,6 +36,8 @@
 		2FB55B7B1CDE2DEB00BF2177 /* HomeTabRightTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTabRightTableViewCell.m; sourceTree = "<group>"; };
 		2FB55B801CDE38DF00BF2177 /* HomeTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTabController.h; sourceTree = "<group>"; };
 		2FB55B811CDE38DF00BF2177 /* HomeTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTabController.m; sourceTree = "<group>"; };
+		2FB55B891CDE419F00BF2177 /* CartTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartTabController.h; sourceTree = "<group>"; };
+		2FB55B8A1CDE419F00BF2177 /* CartTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartTabController.m; sourceTree = "<group>"; };
 		2FBD583D1CCBCB51005361B2 /* SCUxCHG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SCUxCHG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FBD58411CCBCB51005361B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2FBD58421CCBCB51005361B2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -139,6 +142,8 @@
 		2F1C10C51CDCF39500184796 /* Tab */ = {
 			isa = PBXGroup;
 			children = (
+				2FB55B861CDE416000BF2177 /* CartTab */,
+				2FB55B831CDE412900BF2177 /* MyTab */,
 				2F1C10C81CDCF3D900184796 /* HomeTab */,
 			);
 			name = Tab;
@@ -171,6 +176,54 @@
 				2F1C10C61CDCF3B700184796 /* Controller */,
 			);
 			name = HomeTab;
+			sourceTree = "<group>";
+		};
+		2FB55B831CDE412900BF2177 /* MyTab */ = {
+			isa = PBXGroup;
+			children = (
+				2FB55B851CDE413900BF2177 /* Controller */,
+				2FB55B841CDE413300BF2177 /* View */,
+			);
+			name = MyTab;
+			sourceTree = "<group>";
+		};
+		2FB55B841CDE413300BF2177 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		2FB55B851CDE413900BF2177 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		2FB55B861CDE416000BF2177 /* CartTab */ = {
+			isa = PBXGroup;
+			children = (
+				2FB55B881CDE417300BF2177 /* Controller */,
+				2FB55B871CDE416D00BF2177 /* View */,
+			);
+			name = CartTab;
+			sourceTree = "<group>";
+		};
+		2FB55B871CDE416D00BF2177 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		2FB55B881CDE417300BF2177 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2FB55B891CDE419F00BF2177 /* CartTabController.h */,
+				2FB55B8A1CDE419F00BF2177 /* CartTabController.m */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		2FBD58341CCBCB51005361B2 = {
@@ -405,6 +458,7 @@
 				2FBD58431CCBCB51005361B2 /* main.m in Sources */,
 				2FB55B821CDE38DF00BF2177 /* HomeTabController.m in Sources */,
 				2FB55B7C1CDE2DEB00BF2177 /* HomeTabRightTableViewCell.m in Sources */,
+				2FB55B8B1CDE419F00BF2177 /* CartTabController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

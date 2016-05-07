@@ -12,6 +12,8 @@
     UIImageView *_productImage;
     UILabel *_nameLabel;
     UILabel *_priceLabel;
+    UILabel *_campusLabel;  //校区
+    UILabel *_qualityLabel; //成色
 }
 
 @end
