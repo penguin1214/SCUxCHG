@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "DetailViewController.h"
+#import "HomeTabController.h"
 
 @interface AppDelegate ()
 
@@ -16,8 +16,14 @@
 @implementation AppDelegate
 
 
+#pragma mark - UIApplicationDelegate
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = [self rootController];
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
@@ -43,4 +49,27 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+#pragma mark - custom methods
+
+- (UITabBarController*)rootController{
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    
+    //home tab
+    HomeTabController *homeTabController = [[HomeTabController alloc] init];
+    homeTabController.tabBarItem = [self createTabBarItem:@"首页" imageNamed:@"tab_home" selectedImageNamed:@"tab_home_s"];
+    
+    
+    return tabBarController;
+}
+
+- (UITabBarItem*)createTabBarItem:(NSString*)title imageNamed:(NSString*)imageNamed selectedImageNamed:selectedImageNamed{
+    UIImage *image = [[UIImage imageNamed:imageNamed]
+                      imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIImage *selectedImage = [[UIImage imageNamed:selectedImageNamed]
+                              imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:title
+                                                             image:image
+                                                     selectedImage:selectedImage];
+    return tabBarItem;
+}
 @end

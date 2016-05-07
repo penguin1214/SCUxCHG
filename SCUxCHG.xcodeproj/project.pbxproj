@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0B8D9D5D603403B09E1938D0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F37EF9E04E9ADE284FEA06 /* libPods.a */; };
+		2FB55B791CDE2DC400BF2177 /* HomeTabLeftTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB55B781CDE2DC400BF2177 /* HomeTabLeftTableViewCell.m */; };
+		2FB55B7C1CDE2DEB00BF2177 /* HomeTabRightTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB55B7B1CDE2DEB00BF2177 /* HomeTabRightTableViewCell.m */; };
+		2FB55B821CDE38DF00BF2177 /* HomeTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB55B811CDE38DF00BF2177 /* HomeTabController.m */; };
 		2FBD58431CCBCB51005361B2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD58421CCBCB51005361B2 /* main.m */; };
 		2FBD58461CCBCB51005361B2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FBD58451CCBCB51005361B2 /* AppDelegate.m */; };
 		2FBD58511CCBCB51005361B2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FBD58501CCBCB51005361B2 /* Images.xcassets */; };
@@ -26,6 +29,12 @@
 
 /* Begin PBXFileReference section */
 		1CE2C98C722CC6016C19174A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		2FB55B771CDE2DC400BF2177 /* HomeTabLeftTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTabLeftTableViewCell.h; sourceTree = "<group>"; };
+		2FB55B781CDE2DC400BF2177 /* HomeTabLeftTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTabLeftTableViewCell.m; sourceTree = "<group>"; };
+		2FB55B7A1CDE2DEB00BF2177 /* HomeTabRightTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTabRightTableViewCell.h; sourceTree = "<group>"; };
+		2FB55B7B1CDE2DEB00BF2177 /* HomeTabRightTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTabRightTableViewCell.m; sourceTree = "<group>"; };
+		2FB55B801CDE38DF00BF2177 /* HomeTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTabController.h; sourceTree = "<group>"; };
+		2FB55B811CDE38DF00BF2177 /* HomeTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTabController.m; sourceTree = "<group>"; };
 		2FBD583D1CCBCB51005361B2 /* SCUxCHG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SCUxCHG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FBD58411CCBCB51005361B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2FBD58421CCBCB51005361B2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -61,6 +70,7 @@
 		2F1C10BC1CDCEE6000184796 /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				2F1C10C41CDCF38D00184796 /* Base */,
 				2F1C10C01CDCEF1A00184796 /* User */,
 			);
 			name = Module;
@@ -116,6 +126,51 @@
 			children = (
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		2F1C10C41CDCF38D00184796 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				2F1C10C51CDCF39500184796 /* Tab */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		2F1C10C51CDCF39500184796 /* Tab */ = {
+			isa = PBXGroup;
+			children = (
+				2F1C10C81CDCF3D900184796 /* HomeTab */,
+			);
+			name = Tab;
+			sourceTree = "<group>";
+		};
+		2F1C10C61CDCF3B700184796 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2FB55B801CDE38DF00BF2177 /* HomeTabController.h */,
+				2FB55B811CDE38DF00BF2177 /* HomeTabController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		2F1C10C71CDCF3C000184796 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2FB55B771CDE2DC400BF2177 /* HomeTabLeftTableViewCell.h */,
+				2FB55B781CDE2DC400BF2177 /* HomeTabLeftTableViewCell.m */,
+				2FB55B7A1CDE2DEB00BF2177 /* HomeTabRightTableViewCell.h */,
+				2FB55B7B1CDE2DEB00BF2177 /* HomeTabRightTableViewCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		2F1C10C81CDCF3D900184796 /* HomeTab */ = {
+			isa = PBXGroup;
+			children = (
+				2F1C10C71CDCF3C000184796 /* View */,
+				2F1C10C61CDCF3B700184796 /* Controller */,
+			);
+			name = HomeTab;
 			sourceTree = "<group>";
 		};
 		2FBD58341CCBCB51005361B2 = {
@@ -345,8 +400,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FB55B791CDE2DC400BF2177 /* HomeTabLeftTableViewCell.m in Sources */,
 				2FBD58461CCBCB51005361B2 /* AppDelegate.m in Sources */,
 				2FBD58431CCBCB51005361B2 /* main.m in Sources */,
+				2FB55B821CDE38DF00BF2177 /* HomeTabController.m in Sources */,
+				2FB55B7C1CDE2DEB00BF2177 /* HomeTabRightTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
