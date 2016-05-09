@@ -32,10 +32,10 @@
     _leftTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_leftTableView];
     [_leftTableView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.left.equalTo(self.view.mas_left);
-        make.top.equalTo(self.view.mas_top);
+        make.left.equalTo(self.view);
+        make.top.equalTo(self.view);
         make.width.mas_equalTo(_leftTableWidth);
-        make.height.equalTo(self.view.mas_height);
+        make.height.equalTo(self.view);
     }];
     
     _leftTableView.dataSource = self;
@@ -49,6 +49,7 @@
     [_rightTableView mas_makeConstraints:^(MASConstraintMaker *make){
         make.left.equalTo(_leftTableView.mas_right);
         make.right.equalTo(self.view.mas_right);
+        make.top.equalTo(self.view).with.offset(64);    //???
         make.height.equalTo(self.view).with.offset(-112);
     }];
     

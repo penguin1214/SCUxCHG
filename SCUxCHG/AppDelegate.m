@@ -63,7 +63,7 @@
     
     //cart tab
     CartTabController *cartTabController = [[CartTabController alloc] init];
-    cartTabController.tabBarItem = [self createTabBarItem:@"??" imageNamed:@"tab_cart" selectedImageNamed:@"tab_cart_s"];
+    cartTabController.tabBarItem = [self createTabBarItem:@"购物车" imageNamed:@"tab_cart" selectedImageNamed:@"tab_cart_s"];
     UINavigationController *cartNavController = [[UINavigationController alloc] initWithRootViewController:cartTabController];
     
     //my tab
