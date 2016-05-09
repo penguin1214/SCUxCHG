@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "HomeTabController.h"
 #import "CartTabController.h"
+#import "MyTabController.h"
 
 @interface AppDelegate ()
 
@@ -65,7 +66,12 @@
     cartTabController.tabBarItem = [self createTabBarItem:@"??" imageNamed:@"tab_cart" selectedImageNamed:@"tab_cart_s"];
     UINavigationController *cartNavController = [[UINavigationController alloc] initWithRootViewController:cartTabController];
     
-    tabBarController.viewControllers = @[homeNavController, cartNavController];
+    //my tab
+    MyTabController *myTabController = [[MyTabController alloc] init];
+    myTabController.tabBarItem = [self createTabBarItem:@"我的" imageNamed:@"tab_my" selectedImageNamed:@"tab_my_s"];
+    UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:myTabController];
+    
+    tabBarController.viewControllers = @[homeNavController, cartNavController, myNavController];
     return tabBarController;
 }
 
