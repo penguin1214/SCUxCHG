@@ -59,6 +59,7 @@
     homeTabController.tabBarItem = [self createTabBarItem:@"首页" imageNamed:@"tab_home" selectedImageNamed:@"tab_home_s"];
     
     
+    tabBarController.viewControllers = @[homeTabController];
     return tabBarController;
 }
 

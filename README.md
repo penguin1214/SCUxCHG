@@ -20,6 +20,8 @@ SCUxCHG
 
 - Client
 
+	> 2016-5-1 EDIT
+
 	- 学习Auto Layout	[demo][1]
 	- 学习Tab bar	[demo][2]
 	- 学习Navigation Controller	[demo][3]
@@ -27,9 +29,23 @@ SCUxCHG
 	- 学习delegate模式	[demo][4]
 	- 学习使用Afnetworking发送请求	[demo][5]
 
+	> 2016-5-8 EDIT
+
+	- 采用代码构建界面，使用`Masonry库`
+	- 搭建初始页面，根视图控制器为`UITabBarController`，底部由三个tab组成。
+
+
 - Server
 
+	> 2016-5-1 EDIT
+
 	- 接收app端发送的GET、POST请求，目前可以接收请求，数据解析还未完成
+
+	> 2016-5-8 EDIT
+
+	- 可以与app端交换json数据。
+	- 连接mysql数据库完成。（目前在考虑是否使用nosql）
+
 
 [1]: https://github.com/penguin-penpen/ALDemo
 [2]: https://github.com/penguin-penpen/TabDemo

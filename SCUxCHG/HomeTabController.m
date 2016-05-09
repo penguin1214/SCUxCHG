@@ -8,7 +8,7 @@
 
 #import "HomeTabController.h"
 
-@interface HomeTabController () <UITableViewDelegate, UITableViewDataSource> {
+@interface HomeTabController () {
     UITableView *_rightTableView;
 }
 
@@ -35,6 +35,28 @@
     _rightTableView.dataSource = self;
     _rightTableView.delegate = self;
 }
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 1;
+}
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    if (tableView == _rightTableView) {
+        NSString *identifier = @"rightTableViewCell";
+        UITableViewCell *cell = [_rightTableView dequeueReusableCellWithIdentifier:identifier];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.textLabel.text = @"rightTableCell";
+//    }
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+
 
 /*
 #pragma mark - Navigation
