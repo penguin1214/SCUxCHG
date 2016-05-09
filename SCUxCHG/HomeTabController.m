@@ -10,6 +10,8 @@
 
 @interface HomeTabController () {
     UITableView *_rightTableView;
+    UITableView *_leftTableView;
+    CGFloat _leftTableWidth;
 }
 
 @end
@@ -22,13 +24,30 @@
     self.navigationItem.leftBarButtonItem = nil;
     self.title = @"SCUxCHG";
     
+    _leftTableWidth = 100.f;
+    
+    //left table view to display product catagories
+    _leftTableView = [[UITableView alloc] init];
+    _leftTableView.tableFooterView = [[UIView alloc] init];
+    _leftTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:_leftTableView];
+    [_leftTableView mas_makeConstraints:^(MASConstraintMaker *make){
+        make.left.equalTo(self.view.mas_left);
+        make.top.equalTo(self.view.mas_top);
+        make.width.mas_equalTo(_leftTableWidth);
+        make.height.equalTo(self.view.mas_height);
+    }];
+    
+    _leftTableView.dataSource = self;
+    _leftTableView.delegate = self;
+    
     //right table view
     _rightTableView = [[UITableView alloc] init];
     _rightTableView.tableFooterView = [[UIView alloc] init];    //在table下方显示空白view
     _rightTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_rightTableView];
     [_rightTableView mas_makeConstraints:^(MASConstraintMaker *make){
-        make.left.equalTo(self.view.mas_left);
+        make.left.equalTo(_leftTableView.mas_right);
         make.right.equalTo(self.view.mas_right);
         make.height.equalTo(self.view).with.offset(-112);
     }];
@@ -50,14 +69,26 @@
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *identifier = @"rightTableViewCell";
-    UITableViewCell *cell = [_rightTableView dequeueReusableCellWithIdentifier:identifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    if (tableView == _leftTableView) {
+        NSString *identifier = @"leftTableViewCell";
+        UITableViewCell *cell = [_leftTableView dequeueReusableCellWithIdentifier:identifier];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.textLabel.text = @"leftTableCell";
+        return cell;
+        
+    }else{
+        NSString *identifier = @"rightTableViewCell";
+        UITableViewCell *cell = [_rightTableView dequeueReusableCellWithIdentifier:identifier];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.textLabel.text = @"rightTableCell";
+        return cell;
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.textLabel.text = @"rightTableCell";
-    return cell;
 }
 
 #pragma mark - UITableViewDelegate
