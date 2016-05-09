@@ -19,11 +19,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
     self.navigationItem.leftBarButtonItem = nil;
     self.title = @"SCUxCHG";
     
@@ -34,6 +29,12 @@
     
     _rightTableView.dataSource = self;
     _rightTableView.delegate = self;
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+    
 }
 
 #pragma mark - UITableViewDataSource

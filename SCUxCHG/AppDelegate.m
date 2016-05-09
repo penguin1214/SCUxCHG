@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "HomeTabController.h"
+#import "CartTabController.h"
 
 @interface AppDelegate ()
 
@@ -57,9 +58,14 @@
     //home tab
     HomeTabController *homeTabController = [[HomeTabController alloc] init];
     homeTabController.tabBarItem = [self createTabBarItem:@"首页" imageNamed:@"tab_home" selectedImageNamed:@"tab_home_s"];
+    UINavigationController *homeNavController = [[UINavigationController alloc] initWithRootViewController:homeTabController];
     
+    //cart tab
+    CartTabController *cartTabController = [[CartTabController alloc] init];
+    cartTabController.tabBarItem = [self createTabBarItem:@"??" imageNamed:@"tab_cart" selectedImageNamed:@"tab_cart_s"];
+    UINavigationController *cartNavController = [[UINavigationController alloc] initWithRootViewController:cartTabController];
     
-    tabBarController.viewControllers = @[homeTabController];
+    tabBarController.viewControllers = @[homeNavController, cartNavController];
     return tabBarController;
 }
 
