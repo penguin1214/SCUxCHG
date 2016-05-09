@@ -7,6 +7,7 @@
 //
 
 #import "HomeTabController.h"
+#import "HomeTabRightTableViewCell.h"
 
 @interface HomeTabController () {
     UITableView *_rightTableView;
@@ -82,12 +83,12 @@
         
     }else{
         NSString *identifier = @"rightTableViewCell";
-        UITableViewCell *cell = [_rightTableView dequeueReusableCellWithIdentifier:identifier];
+        HomeTabRightTableViewCell *cell = [_rightTableView dequeueReusableCellWithIdentifier:identifier];
         if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+            cell = [[HomeTabRightTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.textLabel.text = @"rightTableCell";
+        [cell fillContentWithProduct];
         return cell;
     }
 }

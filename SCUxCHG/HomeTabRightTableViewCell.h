@@ -12,4 +12,5 @@
 
 + (CGFloat)height;
 
+- (void)fillContentWithProduct;
 @end

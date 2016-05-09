@@ -20,7 +20,7 @@
 @implementation HomeTabRightTableViewCell
 
 + (CGFloat)height{
-    return 85;
+    return 100;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifie{
@@ -31,7 +31,7 @@
     
     self.selectionStyle = UITableViewCellSelectionStyleDefault;
     
-    _productImage = [[UIImageView alloc] init];
+    _productImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checked"]];
     [self addSubview:_productImage];
     [_productImage mas_makeConstraints:^(MASConstraintMaker *make){
         make.left.equalTo(self).with.offset(8);
@@ -41,6 +41,7 @@
     }];
     
     _nameLabel = [[UILabel alloc] init];
+    _nameLabel.font = [UIFont systemFontOfSize:15];
     [self addSubview:_nameLabel];
     [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make){
         make.left.equalTo(_productImage.mas_right).with.offset(10);
@@ -48,6 +49,7 @@
     }];
     
     _priceLabel = [[UILabel alloc] init];
+    _priceLabel.font = [UIFont systemFontOfSize:15];
     [self addSubview:_priceLabel];
     [_priceLabel mas_makeConstraints:^(MASConstraintMaker* make){
         make.left.equalTo(_nameLabel);
@@ -55,10 +57,11 @@
     }];
     
     _campusLabel = [[UILabel alloc] init];
+    _campusLabel.font = [UIFont systemFontOfSize:15];
     [self addSubview:_campusLabel];
     [_campusLabel mas_makeConstraints:^(MASConstraintMaker *make){
-        make.left.equalTo(_nameLabel);
-        make.top.equalTo(_priceLabel.mas_bottom).with.offset(3);
+        make.right.equalTo(self).with.offset(-5);
+        make.top.equalTo(_priceLabel.mas_top);
     }];
     return self;
 }
@@ -66,6 +69,15 @@
     // Initialization code
 }
 
+- (void)fillContentWithProduct{
+    _nameLabel.text = @"productName";
+    
+    _priceLabel.text = @"100";
+    
+    _campusLabel.text = @"Jiang an";
+    
+    _qualityLabel.text = @"九成新";
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
