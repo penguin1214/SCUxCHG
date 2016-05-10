@@ -54,4 +54,87 @@ SCUxCHG
 [5]: https://github.com/penguin-penpen/loginDemo
 
 
-> 项目结构
+项目结构
+---
+
+
+实例类
+---
+
+- BaseEntity : JSONModel
+
+	> (NSNumber*) id
+
+	- CategoryEntity
+
+		> (NSString*) name
+
+		> (NSNumber*) number
+
+		> (NSArray*) products
+
+	- ProductEntity
+
+		> (NSString*) name
+
+		> (NSNumber*) price
+
+		> (NSString*) imageSmall
+
+		> (NSNumber*) attrId
+
+	- ProductAttrEntity
+
+		> (NSNumber*) campus
+
+		> (NSNumber*) quality
+
+	- CartEntity
+
+		> (NSNumber*) count
+
+		> (NSNumber*) isSelected
+
+		> (NSNumber*) productId
+
+	- UserEntity
+
+		> (NSString*) name
+
+		> (NSString*) phome
+
+		> (NSString*) avatar
+
+		> (NSString*) ip
+
+		> (NSString*) regDate
+
+		> (NSString*) loginDate
+
+		> (NSNumber*) level
+
+		> (NSNumber*) campus
+
+	- OrderEntity
+
+		> (NSNumber*) totalPrice
+
+		> (NSNumber*) userId
+
+		> (NSString*) createDate
+
+		> (NSString*) payDate
+
+		> (NSNumber*) hasPaid
+
+		> (NSString*) payType
+
+		> (NSString*) trasactionId
+
+		> (NSArray*) productIds 
+
+
+
+
+
+
