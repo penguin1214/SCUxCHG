@@ -69,8 +69,6 @@ SCUxCHG
 
 		> (NSString*) name
 
-		> (NSNumber*) number
-
 		> (NSArray*) products
 
 	- ProductEntity
@@ -83,13 +81,11 @@ SCUxCHG
 
 		> (NSNumber*) attrId
 
-	- ProductAttrEntity
-
 		> (NSNumber*) campus
 
 		> (NSNumber*) quality
 
-	- CartEntity
+	- CartItemEntity
 
 		> (NSNumber*) count
 
@@ -97,11 +93,15 @@ SCUxCHG
 
 		> (NSNumber*) productId
 
+		> (NSNumber*) boughtPrice
+
+		> (NSNumber*) isBought
+
 	- UserEntity
 
 		> (NSString*) name
 
-		> (NSString*) phome
+		> (NSString*) phone
 
 		> (NSString*) avatar
 
@@ -125,11 +125,11 @@ SCUxCHG
 
 		> (NSString*) payDate
 
-		> (NSNumber*) hasPaid
+		> (NSNumber*) isPaid
 
 		> (NSString*) payType
 
-		> (NSString*) trasactionId
+		> (NSString*) transactionId
 
 		> (NSArray*) productIds 
 
