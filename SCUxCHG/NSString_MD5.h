@@ -1,5 +1,5 @@
 //
-//  NSString+NSString_MD5.h
+//  NSString_MD5.h
 //  SCUxCHG
 //
 //  Created by 杨京蕾 on 5/13/16.
