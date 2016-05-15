@@ -3,3 +3,5 @@ pod ‘AFNetworking’
 pod "NSLogger"
 pod 'Masonry'
 pod 'JSONModel'
+pod 'SDWebImage'
+pod 'MBProgressHUD'
