@@ -13,4 +13,11 @@
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
 #import "Masonry.h"
+#import "ProfileMacro.h"
+#import "ErrorMacro.h"
+#import "ColorMacro.h"
+#import "CommonMacro.h"
+#import "UIColor+hexColor.h"
+#import "NSString+MD5.h"
+
 #endif /* PrefixHeader_pch */
