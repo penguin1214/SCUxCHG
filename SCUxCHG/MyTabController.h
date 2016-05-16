@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseController.h"
 
-@interface MyTabController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface MyTabController : BaseController <UITableViewDataSource, UITableViewDelegate>
 
 @end

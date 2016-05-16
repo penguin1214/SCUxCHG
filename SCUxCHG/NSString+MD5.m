@@ -6,7 +6,7 @@
 //  Copyright © 2016 yang. All rights reserved.
 //
 
-#import "NSString_MD5.h"
+#import "NSString+MD5.h"
 #import <CommonCrypto/CommonDigest.h>
 
 @implementation NSString (NSString_MD5)
