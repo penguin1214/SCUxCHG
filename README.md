@@ -34,6 +34,11 @@ SCUxCHG
 	- 采用代码构建界面，使用`Masonry库`
 	- 搭建初始页面，根视图控制器为`UITabBarController`，底部由三个tab组成。
 
+	> 2016-5-15 EDIT
+
+	- 创建与数据库一致的Entity类
+	- 登录界面基本完成
+
 
 - Server
 
@@ -45,6 +50,10 @@ SCUxCHG
 
 	- 可以与app端交换json数据。
 	- 连接mysql数据库完成。（目前在考虑是否使用nosql）
+
+	> 2016-5-15 EIDT
+
+	- 数据库基本架构完成（使用mysql）
 
 
 [1]: https://github.com/penguin-penpen/ALDemo
@@ -133,6 +142,14 @@ SCUxCHG
 
 		> (NSArray*) productIds 
 
+数据传送格式规范
+
+- Client
+
+｛@”logStat“:, @"userId", @"authToken", @"data":}
+
+- Server
+{@"result":BOOL, @"message":, @"data":{@"[object name":}}
 
 
 
