@@ -23,6 +23,8 @@
     UIButton *_vLoginBtn;
     UIButton *_vForgottenBtn;
     UIButton *_vRegiserBtn;
+    
+//    缺记住密码项!
 }
 
 @end

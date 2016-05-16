@@ -9,5 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface BaseModel : NSObject
-
+/**
+ *  @brief  Root model. All models should inherit BaseModel.
+ */
 @end

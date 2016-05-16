@@ -9,6 +9,8 @@
 #import "BaseController.h"
 #import "BaseLoadingView.h"
 #import "NetworkBrokenView.h"
+#import "MBProgressHUD.h"
+#import "UserLoginController.h"
 
 @interface BaseController ()
 {
@@ -124,7 +126,7 @@
 
 - (BOOL)gotoLoginPageIfNotLogin
 {
-    if (![UserModel isUserLoginByStorage]) {
+    if (![UserModel isUserLoggedIn]) {
         UserLoginController *userLoginCtrl = [UserLoginController new];
         userLoginCtrl.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:userLoginCtrl animated:YES];

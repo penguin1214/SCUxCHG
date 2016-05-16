@@ -29,6 +29,9 @@
     [UserDefaultUtil saveObject:userPwd forKey:kProfileUserPwd];
 }
 
+-(void)saveUserPhone:(NSString *)userPhone{
+    [UserDefaultUtil saveObject:userPhone forKey:kProfileUserPhone];
+}
 -(void)saveAuthToken:(NSString *)authToken{
     [UserDefaultUtil saveObject:authToken forKey:kProfileAuthToken];
 }

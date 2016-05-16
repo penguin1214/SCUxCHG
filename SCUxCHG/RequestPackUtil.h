@@ -10,4 +10,11 @@
 
 @interface RequestPackUtil : NSObject
 
+/**
+ *  @brief  Pack requests with objects.
+ *  All request is packed like
+ *
+ *  {@"logStat":,@"userId":,@"authToken":,@"data"}
+ */
++ (NSDictionary*)packWithData:(NSObject*)data;
 @end

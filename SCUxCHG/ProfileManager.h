@@ -30,6 +30,8 @@
  */
 - (void)saveAuthToken:(NSString*)authToken;
 
+- (void)saveUserPhone:(NSString*)userPhone;
+
 - (NSString*)getUserId;
 
 - (NSString*)getUserPwd;

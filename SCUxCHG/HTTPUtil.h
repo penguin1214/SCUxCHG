@@ -10,4 +10,14 @@
 
 @interface HTTPUtil : AFHTTPSessionManager
 
+/**
+ *  @brief  封装HTTP请求
+ */
+
++ (instancetype)sharedInstance;
+
+//- (void)request:(NSString*)url
+//          param:(NSMutableDictionary*)param
+//        success:(void(^)(BOOL result, NSNumber* resultCode, NSDictionary* data))success
+//        failure:(void(^)(NSError* error))failure;
 @end

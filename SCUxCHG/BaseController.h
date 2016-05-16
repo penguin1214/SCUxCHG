@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "NetworkBrokenView.h"
+#import "UserModel.h"
 
 @interface BaseController : UIViewController <NetworkBrokenViewDelegate>
 #pragma mark - self.navigationController

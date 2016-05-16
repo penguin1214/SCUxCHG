@@ -11,6 +11,12 @@
 
 #define kProfileUserId  @"userId"
 #define kProfileUserPwd @"userPassword"
+#define kProfileUserPhone   @"userPhone"
 #define kProfileAuthToken   @"authToken"
 
+#define kAppCartCookieId    @"appCartCookieId"
+#define kAppLoginToken      @"appLoginToken"
+
+#define kLoggedMark     @"1"
+#define kUnLoggedMark   @"0"
 #endif /* ProfileMacro_h */

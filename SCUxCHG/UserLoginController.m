@@ -38,13 +38,27 @@
     if (![ValidateUtil isValidPhone:phone error:&err]) {
         return;
     }
-    
     if (pwd.length <= 0) {
+        [self toast:@"密码不能为空"];
         return;
     }
+    [self showLoadingView];
+    [UserModel loginWithPhone:phone password:pwd success:^(BOOL result, NSString* message, UserEntity* user, NSString* appCartCookieId){
+        if (result) {
+            [self toast:@"登录成功"];
+            sleep(2);
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }else{
+            [self toast:message];
+        }
+    }failure:^(NSError* error){
+        [self toastWithError:error];
+        [self hideLoadingView];
+    }];
 }
 
 -(void)doClickRegisterBtn{
+    
     
 }
 @end
