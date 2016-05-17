@@ -36,6 +36,10 @@
 
 - (NSString*)getUserPwd;
 
+- (NSString*)getUserPhone;
+
+- (NSString*)getUserLevel;
+
 - (NSString*)getAuthToken;
 
 -(BOOL)checkLogin;

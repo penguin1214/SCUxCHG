@@ -22,4 +22,8 @@
 #define kResponseMessageKey     @"message"
 #define kResponseDataKey        @"data"
 
+//  list status
+#define kListStatusPenddingPay      @"1"
+#define kListStatusDelivering       @"2"
+#define kListStatusFinished         @"3"
 #endif /* CommonMacro_h */

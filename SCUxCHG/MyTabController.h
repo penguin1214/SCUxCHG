@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseController.h"
+#import "MyTabOrderItemCell.h"
 
-@interface MyTabController : BaseController <UITableViewDataSource, UITableViewDelegate>
+@interface MyTabController : BaseController <UITableViewDataSource, UITableViewDelegate, MyTabOrderItemCellDelegate>
 
 @end

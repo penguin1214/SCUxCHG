@@ -44,6 +44,13 @@
     return [UserDefaultUtil getObjectBykey:kProfileUserPwd];
 }
 
+-(NSString *)getUserPhone{
+    return [UserDefaultUtil getObjectBykey:kProfileUserPhone];
+}
+
+-(NSString *)getUserLevel{
+    return [UserDefaultUtil getObjectBykey:kProfileUserLevel];
+}
 -(NSString *)getAuthToken{
     return [UserDefaultUtil getObjectBykey:kProfileAuthToken];
 }

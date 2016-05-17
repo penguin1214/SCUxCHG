@@ -7,9 +7,18 @@
 //
 
 #import "MyTabController.h"
+#import "MyTabHeaderCell.h"
+#import "MyTabMyOrderCell.h"
+#import "MyTabOrderItemCell.h"
+
+typedef enum{
+    eSectionHeader = 0,
+    eSectionSetting
+}eSection;
 
 @interface MyTabController(){
     UITableView *_tableView;
+    UserEntity* _user;
 }
 
 @end
@@ -40,23 +49,75 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
+#pragma mark - UITableviewDataSource
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        return 0;
+    }else{
+        return 10;
+    }
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return eSectionSetting + 1;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *identifier = @"tableViewCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-    }
-    cell.textLabel.text = @"mytab";
+//    NSString *identifier = @"tableViewCell";
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+//    if (!cell) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+//    }
+//    cell.textLabel.text = @"mytab";
+//    return cell;
+
+    NSString* identifier;
+    NSInteger section = indexPath.section;
+    NSInteger row = indexPath.row;
     
-    return cell;
+    //eSectionHeader
+    if (section == eSectionHeader) {
+        identifier = @"MyTabHeaderCell";
+        MyTabHeaderCell* cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (!cell) {
+            cell = [[MyTabHeaderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        }
+//        fill cell with data
+        return cell;
+    }else{  //eSectionSetting
+        if (row == 0) {
+            identifier = @"MyTabMyOrderCell";
+            MyTabMyOrderCell* cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            if (!cell) {
+                cell = [[MyTabMyOrderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier imageNamed:@"icon_my_order" title:@"我的订单"];
+            }
+            return cell;
+        }else{
+            identifier = @"MyTabOrderItemCell";
+            MyTabOrderItemCell* cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            if (!cell) {
+                cell = [[MyTabOrderItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+                cell.delegate = self;
+            }
+            return cell;
+        }
+    }
 }
 
+#pragma mark - MyTabOrderItemCellDelegate
+
+- (void)doGotoOrderListPageWithListStatus:(NSString *)Status{
+    if ([self gotoLoginPageIfNotLogin]) {
+        return;
+    }
+    
+//    order list controller
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

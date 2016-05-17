@@ -36,8 +36,8 @@
     [_productImage mas_makeConstraints:^(MASConstraintMaker *make){
         make.left.equalTo(self).with.offset(8);
         make.centerY.equalTo(self);
-        make.width.mas_equalTo(50);
-        make.height.mas_equalTo(50);
+        make.width.mas_equalTo(20);
+        make.height.mas_equalTo(20);
     }];
     
     _nameLabel = [[UILabel alloc] init];

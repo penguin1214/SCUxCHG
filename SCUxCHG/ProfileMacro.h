@@ -12,6 +12,7 @@
 #define kProfileUserId  @"userId"
 #define kProfileUserPwd @"userPassword"
 #define kProfileUserPhone   @"userPhone"
+#define kProfileUserLevel   @"userLevel"
 #define kProfileAuthToken   @"authToken"
 
 #define kAppCartCookieId    @"appCartCookieId"
