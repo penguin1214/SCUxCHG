@@ -22,9 +22,59 @@
     return manager;
 }
 
+-(void)getImageArrayFromURL:(NSString *)url success:(void (^)(NSArray *))success{
+    //    change serializer
+    //    self.responseSerializer = [AFImageResponseSerializer serializer];
+    
+//    [self GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask* task, id response){
+    [self GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask* task, id response){
+        NSLog(@"Response: %@", response);
+        //        BOOL result = [[response objectForKey:kResponseResultKey] boolValue];
+        //        NSString* message = [response objectForKey:kResponseMessageKey];
+        NSString* imgStr = [[response objectForKey:kResponseDataKey] objectForKey:@"img"];
+        //convert nsstring to nsarray
+        NSCharacterSet *c = [NSCharacterSet characterSetWithCharactersInString:@"[] "];
+        NSArray *array = [[[imgStr componentsSeparatedByCharactersInSet:c]
+                           componentsJoinedByString:@""]
+                          componentsSeparatedByString:@","];
+        //        NSArray* array = [imgStr componentsSeparatedByString:@","];
+        
+        //construct urls
+        NSMutableArray* ret = [[NSMutableArray alloc] init];
+        NSMutableString* url;
+        for (NSString* rawStr in array) {
+            url = [NSMutableString stringWithString:kUrlBase];
+            NSMutableString * newstr = [rawStr stringByReplacingOccurrencesOfString:@"/" withString:@"+"];
+            [url appendString:newstr];
+            [ret addObject:url];
+        }
+         success(ret);
+    }failure:^(NSURLSessionDataTask* task, NSError* error){
+        NSLog(@"Error: %@", error);
+    }];
+}
+
+//-(void)getImageArrayFromURL:(NSString *)url success:(void(^)(NSArray* array))success failure:(void(^)(NSError* error))failure{
+//    [self GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask* task, id response){
+//        NSLog(@"Response: %@", response);
+//        BOOL result = [[response objectForKey:kResponseResultKey] boolValue];
+//        NSString* message = [response objectForKey:kResponseMessageKey];
+//        NSString* imgStr = [[response objectForKey:kResponseDataKey] objectForKey:@"img"];
+//        //convert nsstring to nsarray
+//        NSCharacterSet *c = [NSCharacterSet characterSetWithCharactersInString:@"[] "];
+//        NSArray *array = [[[imgStr componentsSeparatedByCharactersInSet:c]
+//                           componentsJoinedByString:@""]
+//                          componentsSeparatedByString:@","];
+//        success(array);
+//    }failure:^(NSURLSessionDataTask* task, NSError* error){
+//        NSLog(@"Error: %@", error);
+//    }];
+//}
+
+
 //- (void)request:(NSString *)url param:(NSMutableDictionary *)param success:(void (^)(BOOL, NSNumber *, NSDictionary *))success failure:(void (^)(NSError *))failure{
 //    
-////    NSString* appCartCookieId = [[ProfileManager sharedInstance] ]
+//    NSString* appCartCookieId = [[ProfileManager sharedInstance] ]
 //    NSString* userId = [[ProfileManager sharedInstance] getUserId];
 //    NSString* authToken = [[ProfileManager sharedInstance] getAuthToken];
 //    

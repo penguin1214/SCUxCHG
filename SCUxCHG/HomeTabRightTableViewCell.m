@@ -69,19 +69,25 @@
     // Initialization code
 }
 
-- (void)fillContentWithProduct{
-    _nameLabel.text = @"productName";
-    
-    _priceLabel.text = @"100";
-    
-    _campusLabel.text = @"Jiang an";
-    
-    _qualityLabel.text = @"九成新";
-}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
 }
 
+- (void)fillContentWithProduct:(ProductEntity *)product{
+    _nameLabel.text = product.productName;
+    [_productImage sd_setImageWithURL:[NSURL URLWithString:product.productImageURL] placeholderImage:[UIImage imageNamed:@"image_placeholder"]];
+    
+    //  campus
+    if ([product.productCampus integerValue] == 0) {
+        _campusLabel.text = kCampusJiangAn;
+    }else if ([product.productCampus integerValue] == 1){
+        _campusLabel.text = kCampusWangJiang;
+    }else{
+        _campusLabel.text = kCampusHuaXi;
+    }
+    _priceLabel.text = [NSString stringWithFormat:@"%.1f",[product.productPrice floatValue]];
+    _qualityLabel.text = product.productQuality;
+}
 @end

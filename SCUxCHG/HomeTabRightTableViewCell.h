@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ProductEntity.h"
 
 @interface HomeTabRightTableViewCell : UITableViewCell
 
 + (CGFloat)height;
 
-- (void)fillContentWithProduct;
+- (void)fillContentWithProduct:(ProductEntity*)product;
 @end

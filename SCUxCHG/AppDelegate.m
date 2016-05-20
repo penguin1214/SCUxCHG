@@ -10,6 +10,7 @@
 #import "HomeTabController.h"
 #import "CartTabController.h"
 #import "MyTabController.h"
+#import "SellTabController.h"
 
 @interface AppDelegate ()
 
@@ -60,18 +61,28 @@
     HomeTabController *homeTabController = [[HomeTabController alloc] init];
     homeTabController.tabBarItem = [self createTabBarItem:@"首页" imageNamed:@"tab_home" selectedImageNamed:@"tab_home_s"];
     UINavigationController *homeNavController = [[UINavigationController alloc] initWithRootViewController:homeTabController];
+    homeNavController.tabBarItem = [self createTabBarItem:@"首页" imageNamed:@"tab_home" selectedImageNamed:@"tab_home_s"];
+
+    
+    //sell tab
+    SellTabController* sellTabController = [[SellTabController alloc] init];
+    sellTabController.tabBarItem = [self createTabBarItem:@"我要卖" imageNamed:@"tab_sell" selectedImageNamed:@"tab_sell_s"];
+    UINavigationController *sellNavController = [[UINavigationController alloc] initWithRootViewController:sellTabController];
+    sellNavController.tabBarItem = [self createTabBarItem:@"我要卖" imageNamed:@"tab_sell" selectedImageNamed:@"tab_sell_s"];
     
     //cart tab
     CartTabController *cartTabController = [[CartTabController alloc] init];
     cartTabController.tabBarItem = [self createTabBarItem:@"购物车" imageNamed:@"tab_cart" selectedImageNamed:@"tab_cart_s"];
     UINavigationController *cartNavController = [[UINavigationController alloc] initWithRootViewController:cartTabController];
+    cartNavController.tabBarItem = [self createTabBarItem:@"购物车" imageNamed:@"tab_cart" selectedImageNamed:@"tab_cart_s"];
     
     //my tab
     MyTabController *myTabController = [[MyTabController alloc] init];
     myTabController.tabBarItem = [self createTabBarItem:@"我的" imageNamed:@"tab_my" selectedImageNamed:@"tab_my_s"];
     UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:myTabController];
+    myNavController.tabBarItem = [self createTabBarItem:@"我的" imageNamed:@"tab_my" selectedImageNamed:@"tab_my_s"];
     
-    tabBarController.viewControllers = @[homeNavController, cartNavController, myNavController];
+    tabBarController.viewControllers = @[homeNavController, sellNavController, cartNavController, myNavController];
     return tabBarController;
 }
 

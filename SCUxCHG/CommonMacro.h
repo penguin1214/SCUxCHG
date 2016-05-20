@@ -26,4 +26,9 @@
 #define kListStatusPenddingPay      @"1"
 #define kListStatusDelivering       @"2"
 #define kListStatusFinished         @"3"
+
+#define kCampusJiangAn          @"江安"
+#define kCampusWangJiang        @"望江"
+#define kCampusHuaXi            @"华西"
+
 #endif /* CommonMacro_h */

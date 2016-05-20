@@ -12,7 +12,7 @@
 
 @property (nonatomic, copy) NSString* productName;
 @property (nonatomic, copy) NSNumber* productPrice; //float
-@property (nonatomic, copy) NSString* productImage;
+@property (nonatomic, copy) NSString* productImageURL;
 @property (nonatomic, copy) NSNumber* productCampus;    //int
-@property (nonatomic, copy) NSNumber* productQuality;    //int
+@property (nonatomic, copy) NSString* productQuality;
 @end

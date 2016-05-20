@@ -1,5 +1,5 @@
 //
-//  categoryEntity.h
+//  CategoryEntity.h
 //  SCUxCHG
 //
 //  Created by 杨京蕾 on 5/13/16.
@@ -8,7 +8,7 @@
 
 #import "BaseEntity.h"
 
-@interface categoryEntity : BaseEntity
+@interface CategoryEntity : BaseEntity
 
 @property (nonatomic, copy) NSString* cateName;
 @property (nonatomic, copy) NSArray* productIds;
