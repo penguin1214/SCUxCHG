@@ -2,16 +2,27 @@ SCUxCHG
 ---
 
 [ ] 用户注册登录
+
 [ ] 发布二手商品信息
+
 [ ] 购买商品
+
 [ ] 最新商品展示
+
 [ ] 用户管理
+
 [ ] 商品信息管理
+
 [ ] 商品审核
+
 [ ] 留言管理
+
 [ ] 发布公告信息
+
 [ ] 检查用户输入错误项进行提示
+
 [ ] 联网
+
 [ ] 后台管理分页
 
 ### 项目进度
@@ -146,10 +157,15 @@ SCUxCHG
 
 - Client
 
+所有POST请求均封装为
+
 ｛@”logStat“:, @"userId", @"authToken", @"data":}
 
 - Server
-{@"result":BOOL, @"message":, @"data":{@"[object name":}}
+
+所有返回值全部封装为
+
+{@"result":BOOL, @"message":, @"data":{@"object name":}}
 
 
 
