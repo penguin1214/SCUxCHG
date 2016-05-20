@@ -24,7 +24,7 @@
 /**
  *  @brief  get image array with failure
  */
-//-(void)getImageArrayFromURL:(NSString *)url success:(void(^)(NSArray* array))success failure:(void(^)(NSError* error))failure;
+-(void)getImageArrayFromURL:(NSString *)url success:(void(^)(NSArray* array))success failure:(void(^)(NSError* error))failure;
 
 /**
  *  @brief  Get image array.

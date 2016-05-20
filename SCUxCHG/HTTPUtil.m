@@ -54,22 +54,28 @@
     }];
 }
 
-//-(void)getImageArrayFromURL:(NSString *)url success:(void(^)(NSArray* array))success failure:(void(^)(NSError* error))failure{
-//    [self GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask* task, id response){
-//        NSLog(@"Response: %@", response);
-//        BOOL result = [[response objectForKey:kResponseResultKey] boolValue];
-//        NSString* message = [response objectForKey:kResponseMessageKey];
-//        NSString* imgStr = [[response objectForKey:kResponseDataKey] objectForKey:@"img"];
-//        //convert nsstring to nsarray
-//        NSCharacterSet *c = [NSCharacterSet characterSetWithCharactersInString:@"[] "];
-//        NSArray *array = [[[imgStr componentsSeparatedByCharactersInSet:c]
-//                           componentsJoinedByString:@""]
-//                          componentsSeparatedByString:@","];
-//        success(array);
-//    }failure:^(NSURLSessionDataTask* task, NSError* error){
-//        NSLog(@"Error: %@", error);
-//    }];
-//}
+-(void)getImageArrayFromURL:(NSString *)url success:(void(^)(NSArray* array))success failure:(void(^)(NSError* error))failure{
+    [self GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask* task, id response){
+        NSLog(@"Response: %@", response);
+        NSString* imgStr = [[response objectForKey:kResponseDataKey] objectForKey:@"img"];
+        
+        //convert nsstring to nsarray
+        NSArray* array = [StringUtil arrayFromString:imgStr];
+        
+        //construct urls
+        NSMutableArray* ret = [[NSMutableArray alloc] init];
+        NSMutableString* url;
+        for (NSString* rawStr in array) {
+            url = [NSMutableString stringWithString:kUrlBase];
+            [url appendString:[rawStr stringByReplacingOccurrencesOfString:@"/" withString:@"+"]];
+            [ret addObject:url];
+        }
+        success(ret);
+    }failure:^(NSURLSessionDataTask* task, NSError* error){
+        NSLog(@"Error: %@", error);
+        failure(error);
+    }];
+}
 
 
 //- (void)request:(NSString *)url param:(NSMutableDictionary *)param success:(void (^)(BOOL, NSNumber *, NSDictionary *))success failure:(void (^)(NSError *))failure{

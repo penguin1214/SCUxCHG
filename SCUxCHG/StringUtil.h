@@ -13,5 +13,5 @@
 /**
  *  @brief Convert an array like string to NSArray.
  */
-- (NSArray*)arrayFromString:(NSString*)str;
++ (NSArray*)arrayFromString:(NSString*)str;
 @end

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HomeTabController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface HomeTabController : UIViewController <UITableViewDataSource, UITableViewDelegate, SDCycleScrollViewDelegate>
 
 @end

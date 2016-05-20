@@ -10,7 +10,7 @@
 
 @implementation StringUtil
 
--(NSArray *)arrayFromString:(NSString *)str{
++ (NSArray *)arrayFromString:(NSString *)str{
     NSCharacterSet *c = [NSCharacterSet characterSetWithCharactersInString:@"[] "];
     NSArray *array = [[[str componentsSeparatedByCharactersInSet:c]
                        componentsJoinedByString:@""]

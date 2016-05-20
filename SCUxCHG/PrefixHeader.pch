@@ -27,5 +27,6 @@
 
 #import "RequestPackUtil.h"
 #import "HTTPUtil.h"
+#import "StringUtil.h"
 
 #endif /* PrefixHeader_pch */
