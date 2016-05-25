@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseController.h"
 
-@interface HomeTabController : UIViewController <UITableViewDataSource, UITableViewDelegate, SDCycleScrollViewDelegate>
+@interface HomeTabController : BaseController <UITableViewDataSource, UITableViewDelegate, SDCycleScrollViewDelegate>
 
 @end

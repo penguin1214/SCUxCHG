@@ -12,10 +12,10 @@
 #define kScreenBound    [[UIScreen mainScreen] bounds]
 
 //  client request key
-#define kLogStatKey     @"logStat"
-#define kUserIdKey      @"userId"
-#define kAuthTokenKey   @"authToken"
-#define kDataKey        @"data"
+#define kLogStatKey   @"logStat"
+#define kUserIdKey    @"userId"
+#define kAuthTokenKey @"authToken"
+#define kDataKey      @"data"
 
 //  server request key
 #define kResponseResultKey      @"result"

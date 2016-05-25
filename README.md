@@ -50,6 +50,12 @@ SCUxCHG
 	- 创建与数据库一致的Entity类
 	- 登录界面基本完成
 
+	> 2016-5-22 EDIT
+
+	- 前后端请求格式化封装
+	- 首页轮播图远程获取
+	- 图片上传
+
 
 - Server
 
@@ -65,6 +71,8 @@ SCUxCHG
 	> 2016-5-15 EIDT
 
 	- 数据库基本架构完成（使用mysql）
+
+
 
 
 [1]: https://github.com/penguin-penpen/ALDemo

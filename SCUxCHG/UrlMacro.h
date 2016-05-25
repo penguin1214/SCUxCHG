@@ -11,5 +11,6 @@
 
 #define kUrlBase        @"http://localhost:5000/api/"
 
-#define kUrlUserLogin   kUrlBase@"/api/user/login"
+#define kUrlUserLogin   kUrlBase@"user/login"
+#define kUrlCategories    kUrlBase@"categories"
 #endif /* UrlMacro_h */

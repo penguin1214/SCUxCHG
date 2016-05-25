@@ -11,6 +11,8 @@
 #import "CartTabController.h"
 #import "MyTabController.h"
 #import "SellTabController.h"
+#import "AFNetworkActivityLogger.h"
+#import "AFNetworkActivityConsoleLogger.h"
 
 @interface AppDelegate ()
 
@@ -23,6 +25,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    // HTTP Logger
+#ifdef DEBUG
+    AFNetworkActivityConsoleLogger *consoleLogger = [AFNetworkActivityConsoleLogger new];
+    [consoleLogger setLevel:AFLoggerLevelDebug];
+    [[AFNetworkActivityLogger sharedLogger] removeLogger:[[[AFNetworkActivityLogger sharedLogger] loggers] anyObject]];
+    [[AFNetworkActivityLogger sharedLogger] addLogger:consoleLogger];
+    [[AFNetworkActivityLogger sharedLogger] startLogging];
+#endif
+    
     self.window = [[UIWindow alloc] initWithFrame:kScreenBound];
     self.window.rootViewController = [self rootController];
     self.window.backgroundColor = [UIColor whiteColor];
