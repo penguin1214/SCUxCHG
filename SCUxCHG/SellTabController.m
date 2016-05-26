@@ -9,5 +9,10 @@
 #import "SellTabController.h"
 
 @implementation SellTabController
-
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    self.navigationItem.leftBarButtonItem = nil;
+    self.title = @"我要卖";
+}
 @end

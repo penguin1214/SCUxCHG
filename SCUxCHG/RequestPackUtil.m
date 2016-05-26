@@ -24,8 +24,8 @@
         return ret;
     }else{
         [ret setObject:kUnLoggedMark forKey:kLogStatKey];
-        [ret setObject:userId forKey:kUserIdKey];   //can value be nil?
-        [ret setObject:authToken forKey:kAuthTokenKey];
+        [ret setObject:kUnloggedUserId forKey:kUserIdKey];   //value cannot be nil
+        [ret setObject:kUnloggedAuthToken forKey:kAuthTokenKey];
         [ret setObject:data forKey:kDataKey];
         return ret;
     }

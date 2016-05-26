@@ -20,4 +20,8 @@
 
 #define kLoggedMark     @"1"
 #define kUnLoggedMark   @"0"
+
+#define kUnloggedUserId @"user"
+#define kUnloggedAuthToken  @"authToken"
+
 #endif /* ProfileMacro_h */

@@ -10,9 +10,10 @@
 
 @interface ProductEntity : BaseEntity
 
-@property (nonatomic, copy) NSString* productName;
-@property (nonatomic, copy) NSNumber* productPrice; //float
-@property (nonatomic, copy) NSString* productImageURL;
-@property (nonatomic, copy) NSNumber* productCampus;    //int
-@property (nonatomic, copy) NSString* productQuality;
+@property (nonatomic, copy) NSString   * name;
+@property (nonatomic, copy) NSNumber   * category_id;//int
+@property (nonatomic, copy) NSNumber   * price;//float
+@property (nonatomic, copy) NSString   * image;
+@property (nonatomic, copy) NSNumber   * campus;//int
+@property (nonatomic, copy) NSString   * quality;
 @end

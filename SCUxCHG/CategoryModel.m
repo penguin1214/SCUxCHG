@@ -12,9 +12,6 @@
 @implementation CategoryModel
 
 +(void)getCategories:(void (^)(BOOL, NSString *, NSDictionary *))success failure:(void (^)(NSError *))failure{
-#ifdef DEBUG
-    NSLog(@"get categories...");
-#endif
     NSString* url = kUrlCategories;
     [[HTTPUtil sharedInstance] GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask* task, id response){
         NSLog(@"%@", response);
@@ -25,8 +22,6 @@
     }failure:^(NSURLSessionDataTask* task, NSError* error){
         NSLog(@"Error: %@", error);
     }];
-#ifdef DEBUG
-    NSLog(@"get categories finish");
-#endif
 }
+
 @end

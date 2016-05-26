@@ -173,7 +173,7 @@ SCUxCHG
 
 所有返回值全部封装为
 
-{@"result":BOOL, @"message":, @"data":{@"object name":}}
+{@"result":BOOL, @"message":, @"data":}
 
 
 

@@ -1,14 +1,15 @@
+
 //
-//  HomeTabRightTableViewCell.m
+//  ProductTableViewCell.m
 //  SCUxCHG
 //
-//  Created by 杨京蕾 on 5/7/16.
+//  Created by 杨京蕾 on 5/26/16.
 //  Copyright © 2016 yang. All rights reserved.
 //
 
-#import "HomeTabRightTableViewCell.h"
+#import "ProductTableViewCell.h"
 
-@interface HomeTabRightTableViewCell (){
+@interface ProductTableViewCell (){
     UIImageView *_productImage;
     UILabel *_nameLabel;
     UILabel *_priceLabel;
@@ -17,10 +18,10 @@
 }
 
 @end
-@implementation HomeTabRightTableViewCell
+@implementation ProductTableViewCell
 
 + (CGFloat)height{
-    return 100;
+    return 65;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifie{
@@ -28,13 +29,11 @@
     if (!self) {
         return nil;
     }
-    
     self.selectionStyle = UITableViewCellSelectionStyleDefault;
     
-    _productImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checked"]];
     [self addSubview:_productImage];
     [_productImage mas_makeConstraints:^(MASConstraintMaker *make){
-        make.left.equalTo(self).with.offset(8);
+        make.left.equalTo(self.mas_left).with.offset(10);
         make.centerY.equalTo(self);
         make.width.mas_equalTo(20);
         make.height.mas_equalTo(20);
@@ -44,7 +43,7 @@
     _nameLabel.font = [UIFont systemFontOfSize:15];
     [self addSubview:_nameLabel];
     [_nameLabel mas_makeConstraints:^(MASConstraintMaker *make){
-        make.left.equalTo(_productImage.mas_right).with.offset(10);
+        make.left.equalTo(self.mas_left).with.offset(80);
         make.top.equalTo(self).with.offset(10);
     }];
     
@@ -60,9 +59,17 @@
     _campusLabel.font = [UIFont systemFontOfSize:15];
     [self addSubview:_campusLabel];
     [_campusLabel mas_makeConstraints:^(MASConstraintMaker *make){
-        make.right.equalTo(self).with.offset(-5);
+        make.left.equalTo(_priceLabel.mas_right).with.offset(10);
         make.top.equalTo(_priceLabel.mas_top);
     }];
+    
+    _qualityLabel = [[UILabel alloc] init];
+    [self addSubview:_qualityLabel];
+    [_qualityLabel mas_makeConstraints:^(MASConstraintMaker* make){
+        make.left.equalTo(_campusLabel.mas_right).with.offset(10);
+        make.top.equalTo(_campusLabel.mas_top);
+    }];
+    
     return self;
 }
 - (void)awakeFromNib {
@@ -71,7 +78,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 

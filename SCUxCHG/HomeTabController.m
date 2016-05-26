@@ -7,7 +7,9 @@
 //
 
 #import "HomeTabController.h"
-#import "HomeTabRightTableViewCell.h"
+//#import "HomeTabRightTableViewCell.h"
+#import "HomeTabTableViewCell.h"
+#import "HomeTabCategoryController.h"
 #import "CategoryModel.h"
 
 @interface HomeTabController () {
@@ -53,8 +55,8 @@
     
     _vCategoryTableView = [[UITableView alloc] init];
     _vCategoryTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _vCategoryTableView.delegate = self;
-    _vCategoryTableView.dataSource = self;
+//    _vCategoryTableView.delegate = self;
+//    _vCategoryTableView.dataSource = self;
     [self.view addSubview:_vCategoryTableView];
     [_vCategoryTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view);
@@ -114,9 +116,9 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString* identifier = @"HomeTabCategoriesTableViewCell";
-    UITableViewCell* cell = [_vCategoryTableView dequeueReusableCellWithIdentifier:identifier];
+    HomeTabTableViewCell* cell = [_vCategoryTableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell = [[HomeTabTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     cell.textLabel.text = [_categories objectForKey:[@(indexPath.row + 1) stringValue]];
@@ -125,7 +127,11 @@
 
 #pragma mark - UITableViewDelegate
 
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSInteger cateid = indexPath.row + 1;
+    HomeTabCategoryController* categoryController = [[HomeTabCategoryController alloc] initWithCategoryId:cateid andCategoryName:[_categories objectForKey: [@(indexPath.row + 1) stringValue]]];
+    [self.navigationController pushViewController:categoryController animated:YES];
+}
 /*
  #pragma mark - Navigation
  

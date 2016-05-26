@@ -12,4 +12,5 @@
 
 + (void)getCategories:(void(^)(BOOL result, NSString* message, NSDictionary* categories))success
               failure:(void(^)(NSError* error))failure;
+
 @end

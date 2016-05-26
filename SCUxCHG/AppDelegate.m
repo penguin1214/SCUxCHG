@@ -28,11 +28,11 @@
     
     // HTTP Logger
 #ifdef DEBUG
-    AFNetworkActivityConsoleLogger *consoleLogger = [AFNetworkActivityConsoleLogger new];
-    [consoleLogger setLevel:AFLoggerLevelDebug];
-    [[AFNetworkActivityLogger sharedLogger] removeLogger:[[[AFNetworkActivityLogger sharedLogger] loggers] anyObject]];
-    [[AFNetworkActivityLogger sharedLogger] addLogger:consoleLogger];
-    [[AFNetworkActivityLogger sharedLogger] startLogging];
+//    AFNetworkActivityConsoleLogger *consoleLogger = [AFNetworkActivityConsoleLogger new];
+//    [consoleLogger setLevel:AFLoggerLevelDebug];
+//    [[AFNetworkActivityLogger sharedLogger] removeLogger:[[[AFNetworkActivityLogger sharedLogger] loggers] anyObject]];
+//    [[AFNetworkActivityLogger sharedLogger] addLogger:consoleLogger];
+//    [[AFNetworkActivityLogger sharedLogger] startLogging];
 #endif
     
     self.window = [[UIWindow alloc] initWithFrame:kScreenBound];

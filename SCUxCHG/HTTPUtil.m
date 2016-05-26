@@ -29,9 +29,8 @@
 //    [self GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask* task, id response){
     [self GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask* task, id response){
         NSLog(@"Response: %@", response);
-        //        BOOL result = [[response objectForKey:kResponseResultKey] boolValue];
-        //        NSString* message = [response objectForKey:kResponseMessageKey];
-        NSString* imgStr = [[response objectForKey:kResponseDataKey] objectForKey:@"img"];
+
+        NSString* imgStr = [response objectForKey:kResponseDataKey];
         //convert nsstring to nsarray
         NSCharacterSet *c = [NSCharacterSet characterSetWithCharactersInString:@"[] "];
         NSArray *array = [[[imgStr componentsSeparatedByCharactersInSet:c]
@@ -57,7 +56,7 @@
 -(void)getImageArrayFromURL:(NSString *)url success:(void(^)(NSArray* array))success failure:(void(^)(NSError* error))failure{
     [self GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask* task, id response){
         NSLog(@"Response: %@", response);
-        NSString* imgStr = [[response objectForKey:kResponseDataKey] objectForKey:@"img"];
+        NSString* imgStr = [response objectForKey:kResponseDataKey];
         
         //convert nsstring to nsarray
         NSArray* array = [StringUtil arrayFromString:imgStr];

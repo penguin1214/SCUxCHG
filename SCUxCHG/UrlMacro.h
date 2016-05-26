@@ -6,11 +6,14 @@
 //  Copyright © 2016 yang. All rights reserved.
 //
 
-#ifndef UrlMacro_h
-#define UrlMacro_h
+#ifndef                        UrlMacro_h
+#define                        UrlMacro_h
 
 #define kUrlBase        @"http://localhost:5000/api/"
 
-#define kUrlUserLogin   kUrlBase@"user/login"
-#define kUrlCategories    kUrlBase@"categories"
+#define kUrlUserLogin          kUrlBase@"user/login"
+#define kUrlCategories         kUrlBase@"categories"
+#define kUrlProductsOfCategory kUrlBase@"category/products"
+#define kUrlProduct            kUrlBase@"product"
+
 #endif /* UrlMacro_h */
