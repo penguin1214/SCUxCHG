@@ -11,6 +11,7 @@
 #import "HomeTabTableViewCell.h"
 #import "HomeTabCategoryController.h"
 #import "CategoryModel.h"
+#import "HomeTabSearchTableViewController.h"
 
 @interface HomeTabController () {
     //    UITableView *_rightTableView;
@@ -19,6 +20,10 @@
     UITableView* _vCategoryTableView;
     SDCycleScrollView* _vCycleScrollView;
     NSDictionary* _categories;
+    UITableView* _vMainSearchTableView;
+    UISearchController* _cSearchController;
+    UITableViewController* _vSearchResultTalbeViewController;
+    NSArray* _mainViewArray;
 }
 
 @end
@@ -30,6 +35,34 @@
     // Do any additional setup after loading the view.
     self.navigationItem.leftBarButtonItem = nil;
     self.title = @"SCUxCHG";
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Search"
+                                                                    style:UIBarButtonItemStyleDone target:nil action:nil];
+    self.navigationItem.rightBarButtonItem = rightButton;
+    self.navigationItem.rightBarButtonItem.target = self;
+    self.navigationItem.rightBarButtonItem.action = @selector(didClickSearchBtn:);
+    
+    _cSearchController = [[UISearchController alloc] initWithSearchResultsController:_vSearchResultTalbeViewController];
+    [self addChildViewController:_cSearchController];
+    [_cSearchController.searchBar sizeToFit];
+
+    _vMainSearchTableView = [[UITableView alloc] init];
+    _vMainSearchTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _vMainSearchTableView.tableHeaderView = _cSearchController.searchBar;
+    
+//    NSLog(@"self.tableView = %@, self.tableView.tableHeaderView = %@", _vMainSearchTableView, _vMainSearchTableView.tableHeaderView);
+    
+    [self.view addSubview:_vMainSearchTableView];
+    [_vMainSearchTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view);
+//        make.top.equalTo(self.view);
+        make.width.mas_equalTo(self.view);
+        make.height.equalTo(self.view);
+    }];
+    
+    _vMainSearchTableView.delegate = self;
+    _vMainSearchTableView.dataSource = self;
+    _vMainSearchTableView.hidden = YES;
+ 
     
     // 网络加载图片的轮播器
     _vCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, 0, 0) delegate:self placeholderImage:[UIImage imageNamed:@"checked"]];
@@ -67,6 +100,8 @@
     
     _vCategoryTableView.delegate = self;
     _vCategoryTableView.dataSource = self;
+    
+    _mainViewArray = [[NSArray alloc] initWithObjects:_vCycleScrollView, _vCategoryTableView, nil];
     
     [self getData];
 }
@@ -111,18 +146,33 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _categories.count;
+    if (tableView == _vCategoryTableView) {
+       return _categories.count;
+    }else{
+        return 2;
+    }
+    
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString* identifier = @"HomeTabCategoriesTableViewCell";
-    HomeTabTableViewCell* cell = [_vCategoryTableView dequeueReusableCellWithIdentifier:identifier];
-    if (!cell) {
-        cell = [[HomeTabTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    if (tableView == _vCategoryTableView) {
+        NSString* identifier = @"HomeTabCategoriesTableViewCell";
+        HomeTabTableViewCell* cell = [_vCategoryTableView dequeueReusableCellWithIdentifier:identifier];
+        if (!cell) {
+            cell = [[HomeTabTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
+        cell.textLabel.text = [_categories objectForKey:[@(indexPath.row + 1) stringValue]];
+        return cell;
+    }else{
+        NSString* identifier = @"HomeTabMainSearchTableView";
+        UITableViewCell* cell = [_vMainSearchTableView dequeueReusableCellWithIdentifier:identifier];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        }
+        cell.textLabel.text = @"test";
+        return cell;
     }
-    cell.textLabel.text = [_categories objectForKey:[@(indexPath.row + 1) stringValue]];
-    return cell;
 }
 
 #pragma mark - UITableViewDelegate
@@ -131,6 +181,27 @@
     NSInteger cateid = indexPath.row + 1;
     HomeTabCategoryController* categoryController = [[HomeTabCategoryController alloc] initWithCategoryId:cateid andCategoryName:[_categories objectForKey: [@(indexPath.row + 1) stringValue]]];
     [self.navigationController pushViewController:categoryController animated:YES];
+}
+
+#pragma mark - Search View
+
+-(IBAction)didClickSearchBtn:(id)sender
+{
+//    HomeTabSearchTableViewController* searchController = [[HomeTabSearchTableViewController alloc] init];
+//    [self.navigationController pushViewController:searchController animated:YES];
+    for (UIView* view in _mainViewArray) {
+        if (view) {
+            view.hidden = YES;
+        }
+    }
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    _vMainSearchTableView.hidden = NO;
+}
+
+#pragma mark - UISearchResultUpdating
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController{
+    
 }
 /*
  #pragma mark - Navigation

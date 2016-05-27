@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "BaseController.h"
 
-@interface HomeTabController : BaseController <UITableViewDataSource, UITableViewDelegate, SDCycleScrollViewDelegate>
+@interface HomeTabController : BaseController <UITableViewDataSource, UITableViewDelegate, SDCycleScrollViewDelegate, UISearchBarDelegate, UISearchResultsUpdating>
 
 @end
