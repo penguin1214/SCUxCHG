@@ -12,6 +12,12 @@
 #import "HomeTabCategoryController.h"
 #import "CategoryModel.h"
 #import "HomeTabSearchTableViewController.h"
+#import "ProductModel.h"
+
+typedef NS_ENUM(NSUInteger, SEARCH_VIEW_STATUS) {
+    SEARCHVIEWHIDDEN = 0,
+    SEARCHVIEWSHOW
+};
 
 @interface HomeTabController () {
     //    UITableView *_rightTableView;
@@ -24,6 +30,9 @@
     UISearchController* _cSearchController;
     UITableViewController* _vSearchResultTalbeViewController;
     NSArray* _mainViewArray;
+    
+    NSArray* _allProductsIdsAndNamesPairs;
+    NSMutableArray* _filteredProducts;
 }
 
 @end
@@ -44,6 +53,7 @@
     _cSearchController = [[UISearchController alloc] initWithSearchResultsController:_vSearchResultTalbeViewController];
     [self addChildViewController:_cSearchController];
     [_cSearchController.searchBar sizeToFit];
+    [_cSearchController.searchBar setShowsCancelButton:YES];
 
     _vMainSearchTableView = [[UITableView alloc] init];
     _vMainSearchTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -141,15 +151,52 @@
         }
         [weakSelf hideLoadingView];
     }];
+    
+    [ProductModel getAllProductsIdsAndNamesDictionarySuccess:^(BOOL result, NSString* message, NSArray* allProductsIdsAndNamesPaires){
+        if (!result) {
+            _allProductsIdsAndNamesPairs = allProductsIdsAndNamesPaires;
+            NSLog(@"%@", _allProductsIdsAndNamesPairs);
+        }else{
+            [weakSelf toast:message];
+        }
+    }failure:^(NSError* error){
+        if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorNotConnectedToInternet) {
+            [weakSelf showNetworkBrokenView:^(MASConstraintMaker *make) {
+                make.left.equalTo(self.view.mas_left);
+                make.right.equalTo(self.view.mas_right);
+                make.top.equalTo(self.view).with.offset(64);
+                make.height.equalTo(self.view).with.offset(-112);
+            }];
+        } else {
+            [weakSelf toastWithError:error];
+        }
+        [weakSelf hideLoadingView];
+ 
+    }];
 }
 
 #pragma mark - UITableViewDataSource
 
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    if (tableView == _vCategoryTableView) {
+        return 1;
+    }else{
+        return 2;
+    }
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (tableView == _vCategoryTableView) {
        return _categories.count;
     }else{
-        return 2;
+        if (section == 0) {
+            return 1;
+        }else{
+            if (!_cSearchController.active) {
+                return 0;
+            }else{
+                return _filteredProducts.count;
+            }
+        }
     }
     
 }
@@ -170,7 +217,11 @@
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         }
-        cell.textLabel.text = @"test";
+        if (indexPath.section == 0) {
+            cell.textLabel.text = [NSString stringWithFormat:@"搜索 %@", _cSearchController.searchBar.text];
+        }else{
+            cell.textLabel.text = [_filteredProducts objectAtIndex:indexPath.row];
+        }
         return cell;
     }
 }
@@ -178,9 +229,11 @@
 #pragma mark - UITableViewDelegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSInteger cateid = indexPath.row + 1;
-    HomeTabCategoryController* categoryController = [[HomeTabCategoryController alloc] initWithCategoryId:cateid andCategoryName:[_categories objectForKey: [@(indexPath.row + 1) stringValue]]];
-    [self.navigationController pushViewController:categoryController animated:YES];
+    if (tableView == _vCategoryTableView) {
+        NSInteger cateid = indexPath.row + 1;
+        HomeTabCategoryController* categoryController = [[HomeTabCategoryController alloc] initWithCategoryId:cateid andCategoryName:[_categories objectForKey: [@(indexPath.row + 1) stringValue]]];
+        [self.navigationController pushViewController:categoryController animated:YES];
+    }
 }
 
 #pragma mark - Search View
@@ -201,7 +254,13 @@
 #pragma mark - UISearchResultUpdating
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController{
+    [_filteredProducts removeAllObjects];
+    NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[c] %@", _cSearchController.searchBar.text];
     
+    _filteredProducts = [[_allProductsIdsAndNamesPairs filteredArrayUsingPredicate:searchPredicate] mutableCopy];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_vSearchResultTalbeViewController.tableView reloadData];
+    });
 }
 /*
  #pragma mark - Navigation

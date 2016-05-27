@@ -15,5 +15,6 @@
 #define kUrlCategories         kUrlBase@"categories"
 #define kUrlProductsOfCategory kUrlBase@"category/products"
 #define kUrlProduct            kUrlBase@"product"
+#define kUrlAllProductsPairs   kUrlBase@"product/all_id_name_pairs"
 
 #endif /* UrlMacro_h */

@@ -10,7 +10,7 @@
 
 @interface HomeTabSearchTableViewController (){
     UISearchController* _cSearchController;
-    UITableViewController* _cResultTableViewController;
+    UITableViewController* _cSearchResultTableViewController;
 }
 @end
 
