@@ -52,4 +52,17 @@
     }];
 }
 
++(void)searchProductsByName:(NSString *)name success:(void(^)(BOOL, NSString*, NSArray*))success failure:(void(^)(NSError*))failure{
+    NSString* url = kUrlSearchProductsByName;
+    [[HTTPUtil sharedInstance] GET:url parameters:[RequestPackUtil packWithData:name] progress:nil success:^(NSURLSessionDataTask* task, id response){
+        NSLog(@"%@", response);
+        BOOL result = [[response objectForKey:kResponseResultKey] boolValue];
+        NSString* message = [response objectForKey:kResponseMessageKey];
+        NSArray* productIds = [response objectForKey:kResponseDataKey];
+        success(result, message, productIds);
+    }failure:^(NSURLSessionDataTask* task, NSError* error){
+        NSLog(@"Error: %@", error);
+    }];
+}
+
 @end

@@ -11,7 +11,6 @@
 #import "HomeTabTableViewCell.h"
 #import "HomeTabCategoryController.h"
 #import "CategoryModel.h"
-#import "HomeTabSearchTableViewController.h"
 #import "ProductModel.h"
 
 typedef NS_ENUM(NSUInteger, SEARCH_VIEW_STATUS) {
@@ -66,7 +65,7 @@ typedef NS_ENUM(NSUInteger, SEARCH_VIEW_STATUS) {
     
     [self.view addSubview:_vCycleScrollView];
     [_vCycleScrollView mas_makeConstraints:^(MASConstraintMaker* make){
-        make.top.equalTo(self.view);
+        make.top.equalTo(self.view).with.offset(64);
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
         make.height.mas_equalTo(180);
@@ -86,10 +85,16 @@ typedef NS_ENUM(NSUInteger, SEARCH_VIEW_STATUS) {
     
     _vCategoryTableView.delegate = self;
     _vCategoryTableView.dataSource = self;
+    _cMainSearchTableViewController.delegate = self;
     
     //    _mainViewArray = [[NSArray alloc] initWithObjects:_vCycleScrollView, _vCategoryTableView, nil];
     [self getData];
 }
+
+//-(void)viewWillAppear:(BOOL)animated{
+//    [super viewWillAppear:YES];
+//    NSLog(@"appear");
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -170,7 +175,11 @@ typedef NS_ENUM(NSUInteger, SEARCH_VIEW_STATUS) {
     [self.navigationController pushViewController:_cMainSearchTableViewController animated:YES];
 }
 
-
+#pragma mark - HomeTabSearchTableViewDelegate
+-(void)parentViewControllerPop{
+    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController.navigationBar setHidden:NO];
+}
 /*
  #pragma mark - Navigation
  

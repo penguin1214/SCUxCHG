@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseController.h"
+#import "HomeTabSearchTableViewController.h"
 
-@interface HomeTabController : BaseController <UITableViewDataSource, UITableViewDelegate, SDCycleScrollViewDelegate, UISearchBarDelegate>
+@interface HomeTabController : BaseController <UITableViewDataSource, UITableViewDelegate, SDCycleScrollViewDelegate, UISearchBarDelegate, HomeTabSearchTableViewDelegate>
 
 @end

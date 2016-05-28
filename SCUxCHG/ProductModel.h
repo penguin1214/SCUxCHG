@@ -17,4 +17,5 @@
 
 + (void)getAllProductsIdsAndNamesDictionarySuccess:(void(^)(BOOL, NSString*, NSArray*))success failure:(void(^)(NSError*))failure;
 
++ (void)searchProductsByName:(NSString*)name success:(void(^)(BOOL, NSString*, NSArray*))success failure:(void(^)(NSError*))failure;
 @end

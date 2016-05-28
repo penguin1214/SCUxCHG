@@ -22,7 +22,7 @@
         return nil;
     }
     
-    self.selectionStyle = UITableViewCellSelectionStyleDefault;
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.textLabel.font = [UIFont fontWithName:@"Arial" size:13.0];
     return self;
 }

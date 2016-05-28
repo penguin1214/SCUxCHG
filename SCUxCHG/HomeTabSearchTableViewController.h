@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HomeTabSearchTableViewController : UITableViewController<UISearchResultsUpdating, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@protocol HomeTabSearchTableViewDelegate <NSObject>
+
+- (void)parentViewControllerPop;
 
 @end
+
+@interface HomeTabSearchTableViewController : UITableViewController<UISearchResultsUpdating, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+
+@property (weak) id <HomeTabSearchTableViewDelegate> delegate;
+
+@end
+
