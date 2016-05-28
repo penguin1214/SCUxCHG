@@ -13,6 +13,7 @@
 #import "SellTabController.h"
 #import "AFNetworkActivityLogger.h"
 #import "AFNetworkActivityConsoleLogger.h"
+//#import "CocoaLumberjack.h"
 
 @interface AppDelegate ()
 
@@ -27,13 +28,20 @@
     // Override point for customization after application launch.
     
     // HTTP Logger
-#ifdef DEBUG
+//#ifdef DEBUG
 //    AFNetworkActivityConsoleLogger *consoleLogger = [AFNetworkActivityConsoleLogger new];
 //    [consoleLogger setLevel:AFLoggerLevelDebug];
 //    [[AFNetworkActivityLogger sharedLogger] removeLogger:[[[AFNetworkActivityLogger sharedLogger] loggers] anyObject]];
 //    [[AFNetworkActivityLogger sharedLogger] addLogger:consoleLogger];
 //    [[AFNetworkActivityLogger sharedLogger] startLogging];
-#endif
+//    [DDLog addLogger:[DDTTYLogger sharedInstance]]; // TTY = Xcode console
+//    [DDLog addLogger:[DDASLLogger sharedInstance]]; // ASL = Apple System Logs
+//    
+//    DDFileLogger *fileLogger = [[DDFileLogger alloc] init]; // File Logger
+//    fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
+//    fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
+//    [DDLog addLogger:fileLogger];
+//#endif
     
     self.window = [[UIWindow alloc] initWithFrame:kScreenBound];
     self.window.rootViewController = [self rootController];

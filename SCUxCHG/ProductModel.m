@@ -42,7 +42,7 @@
 + (void)getAllProductsIdsAndNamesDictionarySuccess:(void (^)(BOOL, NSString *, NSArray*))success failure:(void (^)(NSError *))failure{
     NSString* url = kUrlAllProductsPairs;
     [[HTTPUtil sharedInstance] GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask* task, id response){
-        NSLog(@"%@", response);
+        NSLog(@"!!!%@", response);
         BOOL result = [[response objectForKey:kResponseResultKey] boolValue];
         NSString* message = [response objectForKey:kResponseMessageKey];
         NSArray* allProductsIdsAndNamesPairs = [response objectForKey:kResponseDataKey];

@@ -25,7 +25,6 @@
 
 -(instancetype)initWithCategoryId:(NSInteger)categoryId andCategoryName:(NSString*)categoryName{
     self = [super init];
-    NSLog(@"initializing...");
     if (!self) {
         return nil;
     }

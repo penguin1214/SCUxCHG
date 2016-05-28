@@ -26,13 +26,9 @@ typedef NS_ENUM(NSUInteger, SEARCH_VIEW_STATUS) {
     UITableView* _vCategoryTableView;
     SDCycleScrollView* _vCycleScrollView;
     NSDictionary* _categories;
-    UITableView* _vMainSearchTableView;
-    UISearchController* _cSearchController;
-    UITableViewController* _vSearchResultTalbeViewController;
-    NSArray* _mainViewArray;
+    HomeTabSearchTableViewController* _cMainSearchTableViewController;
     
-    NSArray* _allProductsIdsAndNamesPairs;
-    NSMutableArray* _filteredProducts;
+    NSArray* _mainViewArray;
 }
 
 @end
@@ -49,30 +45,11 @@ typedef NS_ENUM(NSUInteger, SEARCH_VIEW_STATUS) {
     self.navigationItem.rightBarButtonItem = rightButton;
     self.navigationItem.rightBarButtonItem.target = self;
     self.navigationItem.rightBarButtonItem.action = @selector(didClickSearchBtn:);
+    [self.navigationController setNavigationBarHidden:NO];
     
-    _cSearchController = [[UISearchController alloc] initWithSearchResultsController:_vSearchResultTalbeViewController];
-    [self addChildViewController:_cSearchController];
-    [_cSearchController.searchBar sizeToFit];
-    [_cSearchController.searchBar setShowsCancelButton:YES];
-
-    _vMainSearchTableView = [[UITableView alloc] init];
-    _vMainSearchTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _vMainSearchTableView.tableHeaderView = _cSearchController.searchBar;
-    
-//    NSLog(@"self.tableView = %@, self.tableView.tableHeaderView = %@", _vMainSearchTableView, _vMainSearchTableView.tableHeaderView);
-    
-    [self.view addSubview:_vMainSearchTableView];
-    [_vMainSearchTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view);
-//        make.top.equalTo(self.view);
-        make.width.mas_equalTo(self.view);
-        make.height.equalTo(self.view);
-    }];
-    
-    _vMainSearchTableView.delegate = self;
-    _vMainSearchTableView.dataSource = self;
-    _vMainSearchTableView.hidden = YES;
- 
+    _cMainSearchTableViewController = [[HomeTabSearchTableViewController alloc] init];
+//    _cMainSearchTableViewController.tableView = [[UITableView alloc] initWithFrame:kScreenBound];
+//    [self addChildViewController:_cMainSearchTableViewController];
     
     // 网络加载图片的轮播器
     _vCycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, 0, 0) delegate:self placeholderImage:[UIImage imageNamed:@"checked"]];
@@ -98,8 +75,7 @@ typedef NS_ENUM(NSUInteger, SEARCH_VIEW_STATUS) {
     
     _vCategoryTableView = [[UITableView alloc] init];
     _vCategoryTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    _vCategoryTableView.delegate = self;
-//    _vCategoryTableView.dataSource = self;
+    
     [self.view addSubview:_vCategoryTableView];
     [_vCategoryTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view);
@@ -111,15 +87,13 @@ typedef NS_ENUM(NSUInteger, SEARCH_VIEW_STATUS) {
     _vCategoryTableView.delegate = self;
     _vCategoryTableView.dataSource = self;
     
-    _mainViewArray = [[NSArray alloc] initWithObjects:_vCycleScrollView, _vCategoryTableView, nil];
-    
+    //    _mainViewArray = [[NSArray alloc] initWithObjects:_vCycleScrollView, _vCategoryTableView, nil];
     [self getData];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    
 }
 /**
  *  Get data for category table.
@@ -131,7 +105,7 @@ typedef NS_ENUM(NSUInteger, SEARCH_VIEW_STATUS) {
     [CategoryModel getCategories:^(BOOL result, NSString *message, NSDictionary *categories) {
         if (!result) {
             _categories = categories;
-//            [_vCategoryTableView reloadData];
+            //            [_vCategoryTableView reloadData];
         }else{
             [weakSelf toast:message];
         }
@@ -151,79 +125,31 @@ typedef NS_ENUM(NSUInteger, SEARCH_VIEW_STATUS) {
         }
         [weakSelf hideLoadingView];
     }];
-    
-    [ProductModel getAllProductsIdsAndNamesDictionarySuccess:^(BOOL result, NSString* message, NSArray* allProductsIdsAndNamesPaires){
-        if (!result) {
-            _allProductsIdsAndNamesPairs = allProductsIdsAndNamesPaires;
-            NSLog(@"%@", _allProductsIdsAndNamesPairs);
-        }else{
-            [weakSelf toast:message];
-        }
-    }failure:^(NSError* error){
-        if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorNotConnectedToInternet) {
-            [weakSelf showNetworkBrokenView:^(MASConstraintMaker *make) {
-                make.left.equalTo(self.view.mas_left);
-                make.right.equalTo(self.view.mas_right);
-                make.top.equalTo(self.view).with.offset(64);
-                make.height.equalTo(self.view).with.offset(-112);
-            }];
-        } else {
-            [weakSelf toastWithError:error];
-        }
-        [weakSelf hideLoadingView];
- 
-    }];
 }
 
 #pragma mark - UITableViewDataSource
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if (tableView == _vCategoryTableView) {
-        return 1;
-    }else{
-        return 2;
-    }
-}
+//-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+//    if (tableView == _vCategoryTableView) {
+//        return 1;
+//    }else{
+//        return 2;
+//    }
+//}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (tableView == _vCategoryTableView) {
-       return _categories.count;
-    }else{
-        if (section == 0) {
-            return 1;
-        }else{
-            if (!_cSearchController.active) {
-                return 0;
-            }else{
-                return _filteredProducts.count;
-            }
-        }
-    }
-    
+    return _categories.count;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (tableView == _vCategoryTableView) {
-        NSString* identifier = @"HomeTabCategoriesTableViewCell";
-        HomeTabTableViewCell* cell = [_vCategoryTableView dequeueReusableCellWithIdentifier:identifier];
-        if (!cell) {
-            cell = [[HomeTabTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }
-        cell.textLabel.text = [_categories objectForKey:[@(indexPath.row + 1) stringValue]];
-        return cell;
-    }else{
-        NSString* identifier = @"HomeTabMainSearchTableView";
-        UITableViewCell* cell = [_vMainSearchTableView dequeueReusableCellWithIdentifier:identifier];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-        }
-        if (indexPath.section == 0) {
-            cell.textLabel.text = [NSString stringWithFormat:@"搜索 %@", _cSearchController.searchBar.text];
-        }else{
-            cell.textLabel.text = [_filteredProducts objectAtIndex:indexPath.row];
-        }
-        return cell;
+    
+    NSString* identifier = @"HomeTabCategoriesTableViewCell";
+    HomeTabTableViewCell* cell = [_vCategoryTableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+        cell = [[HomeTabTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
+    cell.textLabel.text = [_categories objectForKey:[@(indexPath.row + 1) stringValue]];
+    return cell;
 }
 
 #pragma mark - UITableViewDelegate
@@ -240,28 +166,11 @@ typedef NS_ENUM(NSUInteger, SEARCH_VIEW_STATUS) {
 
 -(IBAction)didClickSearchBtn:(id)sender
 {
-//    HomeTabSearchTableViewController* searchController = [[HomeTabSearchTableViewController alloc] init];
-//    [self.navigationController pushViewController:searchController animated:YES];
-    for (UIView* view in _mainViewArray) {
-        if (view) {
-            view.hidden = YES;
-        }
-    }
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-    _vMainSearchTableView.hidden = NO;
+   [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self.navigationController pushViewController:_cMainSearchTableViewController animated:YES];
 }
 
-#pragma mark - UISearchResultUpdating
 
-- (void)updateSearchResultsForSearchController:(UISearchController *)searchController{
-    [_filteredProducts removeAllObjects];
-    NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[c] %@", _cSearchController.searchBar.text];
-    
-    _filteredProducts = [[_allProductsIdsAndNamesPairs filteredArrayUsingPredicate:searchPredicate] mutableCopy];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [_vSearchResultTalbeViewController.tableView reloadData];
-    });
-}
 /*
  #pragma mark - Navigation
  
