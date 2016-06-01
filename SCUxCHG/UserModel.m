@@ -32,7 +32,7 @@
         NSLog(@"Response: %@", response);
         BOOL result = [[response objectForKey:kResponseResultKey] boolValue];
         NSString* message = [response objectForKey:kResponseMessageKey];
-        UserEntity* user = [[UserEntity alloc] initWithDictionary:[[response objectForKey:kResponseDataKey] objectForKey:@"user"] error:nil];
+        UserEntity* user = [[UserEntity alloc] initWithDictionary:[response objectForKey:kResponseDataKey] error:nil];
         NSString* appCartCookieId = @"appcartcookie";
         success(result, message, user, appCartCookieId);
     }failure:^(NSURLSessionDataTask* task, NSError* error){
@@ -42,8 +42,8 @@
 
 + (void)saveUserInfoToUserDefault:(UserEntity*)user{
     [[ProfileManager sharedInstance] saveUserId:[user.id stringValue]];
-    [[ProfileManager sharedInstance] saveUserPhone:user.userPhone];
-    [[ProfileManager sharedInstance] saveUserPwd:user.userPwd];
-    [[ProfileManager sharedInstance] saveAuthToken:user.authToken];
+    [[ProfileManager sharedInstance] saveUserPhone:user.phone];
+    [[ProfileManager sharedInstance] saveUserPwd:user.password];
+    [[ProfileManager sharedInstance] saveAuthToken:user.auth_token];
 }
 @end

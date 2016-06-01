@@ -41,6 +41,7 @@ typedef NS_ENUM(NSUInteger, SEARCH_VIEW_STATUS) {
     self.title = @"SCUxCHG";
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Search"
                                                                     style:UIBarButtonItemStyleDone target:nil action:nil];
+    rightButton.tintColor = kColorMainRed;
     self.navigationItem.rightBarButtonItem = rightButton;
     self.navigationItem.rightBarButtonItem.target = self;
     self.navigationItem.rightBarButtonItem.action = @selector(didClickSearchBtn:);
@@ -91,10 +92,16 @@ typedef NS_ENUM(NSUInteger, SEARCH_VIEW_STATUS) {
     [self getData];
 }
 
-//-(void)viewWillAppear:(BOOL)animated{
-//    [super viewWillAppear:YES];
-//    NSLog(@"appear");
-//}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    NSLog(@"appear");
+    [self.navigationController setNavigationBarHidden:NO];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -134,13 +141,6 @@ typedef NS_ENUM(NSUInteger, SEARCH_VIEW_STATUS) {
 
 #pragma mark - UITableViewDataSource
 
-//-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-//    if (tableView == _vCategoryTableView) {
-//        return 1;
-//    }else{
-//        return 2;
-//    }
-//}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _categories.count;
 }

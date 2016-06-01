@@ -8,25 +8,49 @@
 
 #import "UserLoginController.h"
 #import "ValidateUtil.h"
+#import "UserRegStep1Controller.h"
 
 @interface UserLoginController () <UserLoginViewDelegate>{
     UserLoginView* _vLoginView;
+    UserRegStep1Controller* _cRegStep1Controller;
 }
 
 @end
 
 @implementation UserLoginController
 
+-(instancetype)init{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+    
+    self.view = [[UIView alloc] initWithFrame:kScreenBound];
+    _cRegStep1Controller = [[UserRegStep1Controller alloc] init];
+    
+    return self;
+}
 - (void)viewDidLoad{
     [super viewDidLoad];
-    self.title = @"登录";
-    
-    _vLoginView = [[UserLoginView alloc] initWithFrame:kScreenBound];
-    _vLoginView.delegate = self;
-    [self.view addSubview:_vLoginView];
-    
+   
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    self.title = @"登录";
+    
+    _vLoginView = [[UserLoginView alloc] init];
+    _vLoginView.delegate = self;
+
+    [self.view addSubview:_vLoginView];
+    [_vLoginView mas_makeConstraints:^(MASConstraintMaker* make){
+        make.top.equalTo(self.view).with.offset(64);
+        make.left.equalTo(self.view);
+        make.right.equalTo(self.view);
+        make.bottom.equalTo(self.view);
+    }];
+    
+}
 -(void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
 }
@@ -44,12 +68,17 @@
     }
     [self showLoadingView];
     [UserModel loginWithPhone:phone password:pwd success:^(BOOL result, NSString* message, UserEntity* user, NSString* appCartCookieId){
-        if (result) {
+        if (!result) {
+//            [UserModel saveUserInfoToUserDefault:user];
             [self toast:@"登录成功"];
             sleep(2);
             [self.navigationController popToRootViewControllerAnimated:YES];
         }else{
-            [self toast:message];
+            if ([message  isEqual: @"wrong password"]) {
+                [self toast:@"密码错误"];
+            }else{
+                [self toast:message];
+            }
         }
     }failure:^(NSError* error){
         [self toastWithError:error];
@@ -58,7 +87,7 @@
 }
 
 -(void)doClickRegisterBtn{
-    
-    
+    [self.navigationController pushViewController:_cRegStep1Controller animated:YES];
 }
+
 @end

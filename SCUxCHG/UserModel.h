@@ -25,4 +25,6 @@
                                 UserEntity* user,
                                 NSString* appCartCookieId))success
                failure:(void(^)(NSError* error))failure;
+
++ (void)saveUserInfoToUserDefault:(UserEntity*)user;
 @end

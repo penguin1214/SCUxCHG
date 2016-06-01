@@ -11,12 +11,12 @@
 
 @interface UserEntity : BaseEntity
 
-@property (nonatomic, copy) NSString* userName; //用户名   less than 30 chars
-@property (nonatomic, copy) NSString* userPwd;  //密码    less
-@property (nonatomic, copy) NSString* userPhone; //手机号
-@property (nonatomic, copy) NSNumber* userCampus;   //校区    int
-@property (nonatomic, copy) NSString* userAvatar;   //头像
-@property (nonatomic, copy) NSString* regDate;  //注册日期
-@property (nonatomic, copy) NSNumber* userLevel;  //等级  int
-@property (nonatomic, copy) NSString* authToken;    //登录验证token
+@property (nonatomic, copy) NSString* name; //用户名   less than 30 chars
+@property (nonatomic, copy) NSString* password;  //密码    less
+@property (nonatomic, copy) NSString* phone; //手机号
+@property (nonatomic, copy) NSNumber* campus;   //校区    int
+@property (nonatomic, copy) NSString* avatar;   //头像
+@property (nonatomic, copy) NSString* reg_date;  //注册日期
+@property (nonatomic, copy) NSNumber* level;  //等级  int
+@property (nonatomic, copy) NSString* auth_token;    //登录验证token
 @end

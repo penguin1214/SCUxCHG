@@ -10,6 +10,7 @@
 #import "MyTabHeaderCell.h"
 #import "MyTabMyOrderCell.h"
 #import "MyTabOrderItemCell.h"
+#import "UserLoginController.h"
 
 typedef enum{
     eSectionHeader = 0,
@@ -17,7 +18,8 @@ typedef enum{
 }eSection;
 
 @interface MyTabController(){
-    UITableView *_tableView;
+    UserLoginController* _cLoginController;
+    UITableView *_vTableView;
     UserEntity* _user;
 }
 
@@ -36,17 +38,42 @@ typedef enum{
     self.title = @"我的";
     self.navigationItem.leftBarButtonItem = nil;
     
-    _tableView = [[UITableView alloc] initWithFrame:[self.view bounds]];
-    _tableView.tableFooterView = [[UIView alloc] init];
-    _tableView.dataSource = self;
-    _tableView.delegate = self;
-    [self.view addSubview:_tableView];
+    _cLoginController = [[UserLoginController alloc] init];
     
+    _vTableView = [[UITableView alloc] initWithFrame:[self.view bounds]];
+    _vTableView.tableFooterView = [[UIView alloc] init];
+    _vTableView.dataSource = self;
+    _vTableView.delegate = self;
+    [self.view addSubview:_vTableView];
+    [_vTableView mas_makeConstraints:^(MASConstraintMaker* make){
+        make.top.equalTo(self.view);
+        make.left.equalTo(self.view);
+        make.right.equalTo(self.view);
+        make.height.equalTo(self.view);
+        make.width.equalTo(self.view);
+    }];
+    
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"登录"
+                                                                    style:UIBarButtonItemStyleDone target:nil action:nil];
+    rightButton.tintColor = kColorMainRed;
+    self.navigationItem.rightBarButtonItem = rightButton;
+    self.navigationItem.rightBarButtonItem.target = self;
+    self.navigationItem.rightBarButtonItem.action = @selector(loadLoginViewController);
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - UITableViewDelegaet
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0) {
+        return [MyTabHeaderCell height];
+    }else{
+        return 44;
+    }
 }
 
 #pragma mark - UITableviewDataSource
@@ -60,22 +87,18 @@ typedef enum{
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return eSectionSetting + 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    if (section == 0) {
+        return 1;
+    }else{
+        return 3;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    NSString *identifier = @"tableViewCell";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-//    if (!cell) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-//    }
-//    cell.textLabel.text = @"mytab";
-//    return cell;
-
     NSString* identifier;
     NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
@@ -117,6 +140,11 @@ typedef enum{
     }
     
 //    order list controller
+}
+
+#pragma mark - Login
+- (void)loadLoginViewController{
+    [self.navigationController pushViewController:_cLoginController animated:YES];
 }
 /*
 // Override to support conditional editing of the table view.

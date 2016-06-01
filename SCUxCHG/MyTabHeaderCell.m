@@ -10,6 +10,7 @@
 #import "ProfileManager.h"
 
 @interface MyTabHeaderCell (){
+    UIImageView *_vBgImage;
     UIImageView *_vImage;
     UILabel *_vName;
     UILabel *_vLevel;
@@ -34,11 +35,11 @@
     self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     // set cell background image
-    UIImageView *vBgImage = [UIImageView new];
-    vBgImage.image = [UIImage imageNamed:@"head_bg"];
+    _vBgImage = [UIImageView new];
+    _vBgImage.image = [UIImage imageNamed:@"head_bg"];
     //    self.backgroundView = vBgImage;
     self.backgroundColor = [UIColor clearColor];
-    [self setBackgroundView:vBgImage];
+    [self setBackgroundView:_vBgImage];
     
     //_vImage
     CGFloat vImageWidth = 60;
@@ -98,9 +99,9 @@
 - (void)fillContentWithUser:(UserEntity *)user
 {
     if (user.id) {
-        _vName.text = user.userPhone;
+        _vName.text = user.phone;
         _vName.hidden = NO;
-        _vLevel.text = [user.userLevel stringValue];
+        _vLevel.text = [user.level stringValue];
         _vLevel.hidden = NO;
         _vNotLogin.hidden = YES;
     } else {
@@ -118,8 +119,8 @@
     NSString *userLevel = [[ProfileManager sharedInstance] getUserLevel];
     UserEntity *user = [[UserEntity alloc] init];
     user.id = [NSNumber numberWithLong:[userId integerValue]];
-    user.userPhone = userPhone;
-    user.userLevel = [NSNumber numberWithLong:[userLevel integerValue]];
+    user.phone = userPhone;
+    user.level = [NSNumber numberWithLong:[userLevel integerValue]];
     [self fillContentWithUser:user];
 }
 @end

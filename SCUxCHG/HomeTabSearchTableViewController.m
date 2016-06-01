@@ -40,6 +40,13 @@
     self.tableView.tableFooterView = [[UIView alloc]init]; //去掉多余的空行分割线
     NSLog(@"%@", self.tableView.tableHeaderView);
     [_cSearchController.searchBar setShowsCancelButton:YES];
+    id barButtonAppearanceInSearchBar = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
+    
+    [barButtonAppearanceInSearchBar setTitleTextAttributes:@{
+                                                             NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-CondensedBold" size:13],
+                                                             NSForegroundColorAttributeName : kColorMainRed
+                                                             } forState:UIControlStateNormal];
+    [barButtonAppearanceInSearchBar setTitle:@"取消"];
     
 //    _cSearchResultTableViewController.tableView.delegate = self;
 //    _cSearchResultTableViewController.tableView.dataSource = self;

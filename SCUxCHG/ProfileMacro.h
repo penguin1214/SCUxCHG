@@ -9,11 +9,12 @@
 #ifndef ProfileMacro_h
 #define ProfileMacro_h
 
-#define kProfileUserId  @"userId"
-#define kProfileUserPwd @"userPassword"
-#define kProfileUserPhone   @"userPhone"
-#define kProfileUserLevel   @"userLevel"
-#define kProfileAuthToken   @"authToken"
+#define kProfileUserId    @"id"
+#define kProfileUserName  @"name"
+#define kProfileUserPwd   @"password"
+#define kProfileUserPhone @"phone"
+#define kProfileUserLevel @"level"
+#define kProfileAuthToken @"auth_token"
 
 #define kAppCartCookieId    @"appCartCookieId"
 #define kAppLoginToken      @"appLoginToken"
