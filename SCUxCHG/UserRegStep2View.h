@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol UserRegStep2Delegate <NSObject>
+
+- (void)doClickNextBtnWithUserName:(NSString*)name;
+
+@end
+
 @interface UserRegStep2View : UIView
+
+@property (nonatomic, weak) id<UserRegStep2Delegate> delegate;
 
 @end

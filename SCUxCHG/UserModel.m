@@ -40,6 +40,50 @@
     }];
 }
 
++(void)checkUsableUsername:(NSString *)username success:(void (^)(BOOL, NSString *))success failure:(void (^)(NSError *))failure{
+    NSString* url = kUrlCheckUsableUserName;
+    [[HTTPUtil sharedInstance] GET:url parameters:[RequestPackUtil packWithData:username] progress:nil success:^(NSURLSessionDataTask* task, id response){
+        NSLog(@"Response: %@", response);
+        BOOL result = [[response objectForKey:kResponseResultKey] boolValue];
+        NSString* message = [response objectForKey:kResponseMessageKey];
+        success(result, message);
+    }failure:^(NSURLSessionDataTask* task, NSError* error){
+        NSLog(@"Error: %@", error);
+    }];
+}
+
++(void)checkUsablePhone:(NSString *)phone success:(void (^)(BOOL, NSString *))success failure:(void (^)(NSError *))failure{
+    NSString* url = kUrlCheckUsablePhone;
+    [[HTTPUtil sharedInstance] GET:url parameters:[RequestPackUtil packWithData:phone] progress:nil success:^(NSURLSessionDataTask* task, id response){
+        NSLog(@"Response: %@", response);
+        BOOL result = [[response objectForKey:kResponseResultKey] boolValue];
+        NSString* message = [response objectForKey:kResponseMessageKey];
+        success(result, message);
+    }failure:^(NSURLSessionDataTask* task, NSError* error){
+        NSLog(@"Error: %@", error);
+    }];
+}
+
++ (void)addNewUserOfUsername:(NSString *)username andPhone:(NSString *)phone andPassword:(NSString *)pwd andCampus:(NSInteger)campus success:(void (^)(BOOL, NSString *, UserEntity *))success failure:(void (^)(NSError *))failure{
+    NSString* url = kUrlAddNewUser;
+    NSString* password = [pwd MD5String];
+    NSDictionary* data = [NSDictionary dictionaryWithObjectsAndKeys:
+                          username, @"username",
+                          phone, @"phone",
+                          password, @"password",
+                          [NSNumber numberWithInteger:campus], @"campus", nil];
+    NSDictionary* param = [RequestPackUtil packWithData:data];
+    [[HTTPUtil sharedInstance] POST:url parameters:param progress:nil success: ^(NSURLSessionDataTask* task, id response){
+        NSLog(@"Response: %@", response);
+        BOOL result = [[response objectForKey:kResponseResultKey] boolValue];
+        NSString* message = [response objectForKey:kResponseMessageKey];
+        UserEntity* user = [[UserEntity alloc] initWithDictionary:[response objectForKey:kResponseDataKey] error:nil];
+        success(result, message, user);
+    }failure:^(NSURLSessionDataTask* task, NSError* error){
+        NSLog(@"Error: %@", error);
+    }];
+}
+
 + (void)saveUserInfoToUserDefault:(UserEntity*)user{
     [[ProfileManager sharedInstance] saveUserId:[user.id stringValue]];
     [[ProfileManager sharedInstance] saveUserPhone:user.phone];

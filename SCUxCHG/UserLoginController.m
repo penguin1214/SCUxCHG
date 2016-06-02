@@ -27,6 +27,7 @@
     
     self.view = [[UIView alloc] initWithFrame:kScreenBound];
     _cRegStep1Controller = [[UserRegStep1Controller alloc] init];
+    _cRegStep1Controller.delegate = self;
     
     return self;
 }
@@ -90,4 +91,8 @@
     [self.navigationController pushViewController:_cRegStep1Controller animated:YES];
 }
 
+#pragma mark - UserRegStep1ControllerDelegate
+-(void)backToLoginController{
+    [self.navigationController popViewControllerAnimated:NO];
+}
 @end

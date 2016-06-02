@@ -8,6 +8,7 @@
 
 #import "UserRegStep1Controller.h"
 #import "UserRegStep2Controller.h"
+#import "ValidateUtil.h"
 
 @interface UserRegStep1Controller (){
     UserRegStep1View* _vRegViewStep1;
@@ -26,6 +27,8 @@
     
     self.view = [[UIView alloc] initWithFrame:kScreenBound];
     _cRegStep2Controller = [[UserRegStep2Controller alloc] init];
+    _cRegStep2Controller.delegate = self;
+    
     return self;
 }
 - (void)viewDidLoad{
@@ -50,7 +53,31 @@
 #pragma mark - UserRegStep1Delegate
 
 -(void)doClickRegBtnStep1WithPhone:(NSString *)phone andPassword:(NSString *)pwd{
-    NSLog(@"进入第二步");
-    [self.navigationController pushViewController:_cRegStep2Controller animated:YES];
+    NSError* error = nil;
+    if (![ValidateUtil isValidPhone:phone error:&error]) {
+        [self toast:error.localizedDescription];
+    }else{
+        if (![ValidateUtil isValidPassword:pwd error:&error]) {
+            [self toast:error.localizedDescription];
+        }else{
+            [UserModel checkUsablePhone:phone success:^(BOOL result, NSString* message){
+                if (!result) {
+                    NSLog(@"进入第二步");
+                    [_cRegStep2Controller refreshPhone:phone andPassword:pwd];
+                    [self.navigationController pushViewController:_cRegStep2Controller animated:YES];
+                }else{
+                    [self toast:@"手机号已被注册，请登录"];
+                }
+            }failure:^(NSError* error){
+                NSLog(@"%@", error);
+            }];
+        }
+    }
+}
+
+#pragma mark - UserRegStep2ControllerDelegate
+-(void)backToStep1Controller{
+    [self.navigationController popViewControllerAnimated:YES];
+    [self.delegate backToLoginController];
 }
 @end

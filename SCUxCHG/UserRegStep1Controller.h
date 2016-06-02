@@ -8,9 +8,18 @@
 
 #import "BaseController.h"
 #import "UserRegStep1View.h"
+#import "UserRegStep2Controller.h"
 
-@interface UserRegStep1Controller : BaseController<UserRegStep1Delegate>
+@protocol UserRegStep1ControllerDelegate <NSObject>
+
+- (void)backToLoginController;
+
+@end
+
+@interface UserRegStep1Controller : BaseController<UserRegStep1Delegate,UserRegStep2ControllerDelegate>
 /**
  *  输入手机、密码，验证手机号是否可用。
  */
+@property (nonatomic, weak) id<UserRegStep1ControllerDelegate> delegate;
+
 @end

@@ -7,9 +7,21 @@
 //
 
 #import "BaseController.h"
+#import "UserRegStep2View.h"
+#import "UserRegStep3Controller.h"
 
-@interface UserRegStep2Controller : BaseController
+@protocol UserRegStep2ControllerDelegate <NSObject>
+
+- (void)backToStep1Controller;
+
+@end
+
+@interface UserRegStep2Controller : BaseController<UserRegStep2Delegate, UserRegStep3ControllerDelegate>
 /**
  *  输入用户名，验证用户名是否可用。
  */
+@property (nonatomic, weak) id<UserRegStep2ControllerDelegate> delegate;
+
+- (void)refreshPhone:(NSString*)phone andPassword:(NSString*)pwd;
+
 @end

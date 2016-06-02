@@ -7,7 +7,17 @@
 //
 
 #import "BaseController.h"
+#import "UserRegStep3View.h"
 
-@interface UserRegStep3Controller : BaseController
+@protocol UserRegStep3ControllerDelegate <NSObject>
 
+- (void)backToStep2Controller;
+
+@end
+
+@interface UserRegStep3Controller : BaseController<UIPickerViewDelegate, UIPickerViewDataSource, UserRegStep3Delegate>
+
+- (void)refreshUsername:(NSString*)username andPhone:(NSString*)phone andPassword:(NSString*)pwd;
+
+@property (nonatomic, weak) id<UserRegStep3ControllerDelegate> delegate;
 @end

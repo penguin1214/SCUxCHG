@@ -19,13 +19,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SCUxCHG/UserLoginView.m"
-            timestampString = "486316401.534007"
+            filePath = "SCUxCHG/UserRegStep3Controller.m"
+            timestampString = "486565860.038792"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
-            landmarkName = "-clickLoginBtn"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "-pickerView:didSelectRow:inComponent:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -35,13 +35,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SCUxCHG/UserLoginView.m"
-            timestampString = "486316402.337282"
+            filePath = "SCUxCHG/UserRegStep1Controller.m"
+            timestampString = "486559991.632797"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
-            landmarkName = "-clickLoginBtn"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "-doClickRegBtnStep1WithPhone:andPassword:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -51,13 +51,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SCUxCHG/UserLoginController.m"
-            timestampString = "486451977.506575"
+            filePath = "SCUxCHG/UserModel.m"
+            timestampString = "486567906.088905"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "-doClickLoginBtnWithPhone:password:"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "+addNewUserOfUsername:andPhone:andPassword:andCampus:success:failure:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

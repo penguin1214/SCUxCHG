@@ -17,5 +17,8 @@
 #define kUrlProduct              kUrlBase@"product"
 #define kUrlAllProductsPairs     kUrlBase@"product/all_id_name_pairs"
 #define kUrlSearchProductsByName kUrlBase@"product/search_by_name"
+#define kUrlCheckUsableUserName  kUrlBase@"user/usable_username"
+#define kUrlCheckUsablePhone     kUrlBase@"user/usable_phone"
+#define kUrlAddNewUser           kUrlBase@"user/add_new_user"
 
 #endif /* UrlMacro_h */

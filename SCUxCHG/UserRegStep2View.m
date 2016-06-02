@@ -78,7 +78,7 @@
     }];
     
     _vStep2NextBtn = [[UIButton alloc] init];
-    [_vStep2NextBtn setTitle:@"注册" forState:UIControlStateNormal];
+    [_vStep2NextBtn setTitle:@"下一步" forState:UIControlStateNormal];
     [_vStep2NextBtn setTitleColor:kColorWhite forState:UIControlStateNormal];
     [_vStep2NextBtn setBackgroundColor:kColorMainRed];
     [_vButtonGrid addSubview:_vStep2NextBtn];
@@ -88,6 +88,14 @@
         make.top.equalTo(_vButtonGrid).with.offset(20);
     }];
     
+    [_vStep2NextBtn addTarget:self action:@selector(clickNextBtn) forControlEvents:UIControlEventTouchUpInside];
+    
     return self;
+}
+
+#pragma mark - Action
+
+- (void)clickNextBtn{
+    [self.delegate doClickNextBtnWithUserName:_vUserNameTextField.text];
 }
 @end

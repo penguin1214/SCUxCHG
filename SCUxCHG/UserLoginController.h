@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "BaseController.h"
 #import "UserLoginView.h"
-@interface UserLoginController : BaseController
+#import "UserRegStep1Controller.h"
+
+@interface UserLoginController : BaseController<UserRegStep1ControllerDelegate>
 
 @end

@@ -27,4 +27,20 @@
                failure:(void(^)(NSError* error))failure;
 
 + (void)saveUserInfoToUserDefault:(UserEntity*)user;
+
++ (void)checkUsableUsername:(NSString*)username
+                    success:(void(^)(BOOL result, NSString* message))success
+                    failure:(void(^)(NSError* error))failure;
+
++ (void)checkUsablePhone:(NSString*)phone
+                    success:(void(^)(BOOL result, NSString* message))success
+                    failure:(void(^)(NSError* error))failure;
+
++ (void)addNewUserOfUsername:(NSString*)username
+                    andPhone:(NSString*)phone
+                 andPassword:(NSString*)pwd
+                   andCampus:(NSInteger)campus
+                     success:(void(^)(BOOL result, NSString* message, UserEntity* user))success
+                     failure:(void(^)(NSError* error))failure;
+
 @end

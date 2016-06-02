@@ -105,6 +105,7 @@
     
     _vPwdText = [[UITextField alloc] init];
     _vPwdText.placeholder = @"密码";
+    _vPwdText.secureTextEntry = YES;
     _vPwdText.keyboardType = UIKeyboardTypeAlphabet;
     [_vPwdGrid addSubview:_vPwdText];
     [_vPwdText mas_makeConstraints:^(MASConstraintMaker* make){
