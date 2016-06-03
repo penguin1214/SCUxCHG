@@ -70,7 +70,8 @@
     [self showLoadingView];
     [UserModel loginWithPhone:phone password:pwd success:^(BOOL result, NSString* message, UserEntity* user, NSString* appCartCookieId){
         if (!result) {
-//            [UserModel saveUserInfoToUserDefault:user];
+            [UserModel saveUserInfoToUserDefault:user];
+            [self passUser:user];
             [self toast:@"登录成功"];
             sleep(2);
             [self.navigationController popToRootViewControllerAnimated:YES];
@@ -89,6 +90,10 @@
 
 -(void)doClickRegisterBtn{
     [self.navigationController pushViewController:_cRegStep1Controller animated:YES];
+}
+
+- (void)passUser:(UserEntity*)user{
+    [self.delegate getUser:user];
 }
 
 #pragma mark - UserRegStep1ControllerDelegate

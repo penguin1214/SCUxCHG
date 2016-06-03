@@ -10,7 +10,8 @@
 #import "MyTabHeaderCell.h"
 #import "MyTabMyOrderCell.h"
 #import "MyTabOrderItemCell.h"
-#import "UserLoginController.h"
+#import "ProfileManager.h"
+
 
 typedef enum{
     eSectionHeader = 0,
@@ -39,6 +40,7 @@ typedef enum{
     self.navigationItem.leftBarButtonItem = nil;
     
     _cLoginController = [[UserLoginController alloc] init];
+    _cLoginController.delegate = self;
     
     _vTableView = [[UITableView alloc] initWithFrame:[self.view bounds]];
     _vTableView.tableFooterView = [[UIView alloc] init];
@@ -52,15 +54,29 @@ typedef enum{
         make.height.equalTo(self.view);
         make.width.equalTo(self.view);
     }];
-    
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"登录"
-                                                                    style:UIBarButtonItemStyleDone target:nil action:nil];
-    rightButton.tintColor = kColorMainRed;
-    self.navigationItem.rightBarButtonItem = rightButton;
-    self.navigationItem.rightBarButtonItem.target = self;
-    self.navigationItem.rightBarButtonItem.action = @selector(loadLoginViewController);
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    if (_user) {
+        UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"退出"
+                                                                        style:UIBarButtonItemStyleDone target:nil action:nil];
+        rightButton.tintColor = kColorMainRed;
+        self.navigationItem.rightBarButtonItem = rightButton;
+        self.navigationItem.rightBarButtonItem.target = self;
+        //退出
+        self.navigationItem.rightBarButtonItem.action = @selector(logout);
+    }else{
+        UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"登录"
+                                                                        style:UIBarButtonItemStyleDone target:nil action:nil];
+        rightButton.tintColor = kColorMainRed;
+        self.navigationItem.rightBarButtonItem = rightButton;
+        self.navigationItem.rightBarButtonItem.target = self;
+        self.navigationItem.rightBarButtonItem.action = @selector(loadLoginViewController);
+    }
+    
+    [_vTableView reloadData];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -94,7 +110,7 @@ typedef enum{
     if (section == 0) {
         return 1;
     }else{
-        return 3;
+        return 2;
     }
 }
 
@@ -110,7 +126,8 @@ typedef enum{
         if (!cell) {
             cell = [[MyTabHeaderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         }
-//        fill cell with data
+        //        fill cell with data
+        [cell fillContentWithUser:_user];
         return cell;
     }else{  //eSectionSetting
         if (row == 0) {
@@ -139,55 +156,71 @@ typedef enum{
         return;
     }
     
-//    order list controller
+    //    order list controller
 }
 
-#pragma mark - Login
+#pragma mark - UserLoginControllerDelegate
+-(void)getUser:(UserEntity *)user{
+    _user = user;
+}
+
+#pragma mark - User
 - (void)loadLoginViewController{
     [self.navigationController pushViewController:_cLoginController animated:YES];
 }
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+
+-(void)refreshUser:(UserEntity *)user{
+    _user = user;
 }
-*/
+
+- (void)logout{
+    [[ProfileManager sharedInstance] logout];
+    _user = nil;
+    [self loadLoginViewController];
+}
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+ }
+ */
 
 /*
-#pragma mark - Navigation
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

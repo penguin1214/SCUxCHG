@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UserEntity.h"
 
 @interface ProfileManager : NSObject
 
@@ -45,5 +46,7 @@
 -(BOOL)checkLogin;
 
 -(void)logout;
+
+
 
 @end

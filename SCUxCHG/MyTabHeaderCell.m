@@ -98,14 +98,21 @@
 
 - (void)fillContentWithUser:(UserEntity *)user
 {
-    if (user.id) {
-        _vName.text = user.phone;
+    if (user) {
+//    if (user.id) {
+        _vName.text = user.username;
         _vName.hidden = NO;
         _vLevel.text = [user.level stringValue];
         _vLevel.hidden = NO;
         _vNotLogin.hidden = YES;
-    } else {
-        _vNotLogin.text = @"登录/注册";
+//    } else {
+//        _vNotLogin.text = @"登录/注册";
+//        _vName.hidden = YES;
+//        _vLevel.hidden = YES;
+//        _vNotLogin.hidden = NO;
+//    }
+    }else{
+        _vNotLogin.text = @"请登录/注册";
         _vName.hidden = YES;
         _vLevel.hidden = YES;
         _vNotLogin.hidden = NO;

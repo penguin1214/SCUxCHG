@@ -13,6 +13,8 @@
 #import "SellTabController.h"
 #import "AFNetworkActivityLogger.h"
 #import "AFNetworkActivityConsoleLogger.h"
+#import "ProfileManager.h"
+
 //#import "CocoaLumberjack.h"
 
 @interface AppDelegate ()
@@ -103,6 +105,19 @@
     myNavController.tabBarItem = [self createTabBarItem:@"我的" imageNamed:@"tab_my" selectedImageNamed:@"tab_my_s"];
     
     tabBarController.viewControllers = @[homeNavController, sellNavController, cartNavController, myNavController];
+    
+    //auto login
+    if ([[ProfileManager sharedInstance] checkLogin]) {
+        [UserModel loginWithAuthTokenSuccess:^(BOOL result, NSString* message, UserEntity* user){
+            [myTabController refreshUser:user];
+        }failure:^(NSError* error){
+            NSLog(@"%@", error);
+        }];
+    }else{
+        NSLog(@"未登录");
+    }
+    
+
     return tabBarController;
 }
 

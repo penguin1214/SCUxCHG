@@ -23,16 +23,18 @@
 
 +(void)loginWithPhone:(NSString *)phone password:(NSString *)pwd success:(void (^)(BOOL result, NSString* message, UserEntity * user, NSString* appCartCookieId))success failure:(void (^)(NSError *))failure{
     NSString* url = kUrlUserLogin;
+    NSString* password = [pwd MD5String];
     NSDictionary* data = [NSDictionary dictionaryWithObjectsAndKeys:
                            phone, @"phone",
-                           pwd, @"password",
+                           password, @"password",
                            nil];
     NSDictionary* param = [RequestPackUtil packWithData:data];
     [[HTTPUtil sharedInstance] POST:url parameters:param progress:nil success:^(NSURLSessionDataTask* task, id response){
         NSLog(@"Response: %@", response);
         BOOL result = [[response objectForKey:kResponseResultKey] boolValue];
         NSString* message = [response objectForKey:kResponseMessageKey];
-        UserEntity* user = [[UserEntity alloc] initWithDictionary:[response objectForKey:kResponseDataKey] error:nil];
+        NSDictionary* data = [response objectForKey:kDataKey];
+        UserEntity* user = [[UserEntity alloc] initWithDictionary:data error:nil];
         NSString* appCartCookieId = @"appcartcookie";
         success(result, message, user, appCartCookieId);
     }failure:^(NSURLSessionDataTask* task, NSError* error){
@@ -89,5 +91,20 @@
     [[ProfileManager sharedInstance] saveUserPhone:user.phone];
     [[ProfileManager sharedInstance] saveUserPwd:user.password];
     [[ProfileManager sharedInstance] saveAuthToken:user.auth_token];
+}
+
++ (void)loginWithAuthTokenSuccess:(void (^)(BOOL, NSString *, UserEntity *))success failure:(void (^)(NSError *))failure{
+    NSString* token = [[ProfileManager sharedInstance] getAuthToken];
+    NSString* url = KUrlUserLoginWithAuthToken;
+    NSDictionary* param = [RequestPackUtil packWithData:token];
+    [[HTTPUtil sharedInstance] POST:url parameters:param progress:nil success:^(NSURLSessionDataTask* task, id response){
+        NSLog(@"Response: %@", response);
+        BOOL result = [[response objectForKey:kResponseResultKey] boolValue];
+        NSString* message = [response objectForKey:kResponseMessageKey];
+        UserEntity* user = [[UserEntity alloc] initWithDictionary:[response objectForKey:kResponseDataKey] error:nil];
+        success(result, message, user);
+    }failure:^(NSURLSessionDataTask* task, NSError* error){
+        NSLog(@"Error: %@", error);
+    }];
 }
 @end

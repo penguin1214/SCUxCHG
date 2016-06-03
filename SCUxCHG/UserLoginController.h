@@ -11,6 +11,14 @@
 #import "UserLoginView.h"
 #import "UserRegStep1Controller.h"
 
+@protocol UserLoginControllerDelegate <NSObject>
+
+-(void)getUser:(UserEntity*)user;
+
+@end
+
 @interface UserLoginController : BaseController<UserRegStep1ControllerDelegate>
+
+@property (nonatomic, weak) id<UserLoginControllerDelegate> delegate;
 
 @end

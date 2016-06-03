@@ -43,4 +43,6 @@
                      success:(void(^)(BOOL result, NSString* message, UserEntity* user))success
                      failure:(void(^)(NSError* error))failure;
 
++ (void)loginWithAuthTokenSuccess:(void(^)(BOOL, NSString*, UserEntity*))success failure:(void(^)(NSError* error))failure;
+
 @end

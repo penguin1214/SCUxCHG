@@ -11,7 +11,7 @@
 
 @interface UserEntity : BaseEntity
 
-@property (nonatomic, copy) NSString* name; //用户名   less than 30 chars
+@property (nonatomic, copy) NSString* username; //用户名   less than 30 chars
 @property (nonatomic, copy) NSString* password;  //密码    less
 @property (nonatomic, copy) NSString* phone; //手机号
 @property (nonatomic, copy) NSNumber* campus;   //校区    int
