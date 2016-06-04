@@ -7,7 +7,12 @@
 //
 
 #import "BaseController.h"
+#import "DownPicker.h"
+#import "SellTabView.h"
 
-@interface SellTabController : BaseController
+@interface SellTabController : BaseController<UITextFieldDelegate, UITextViewDelegate, SellTabViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@property (nonatomic, strong) DownPicker* categoryDownPicker;
+@property (nonatomic, strong) DownPicker* qualityDownPicker;
 
 @end

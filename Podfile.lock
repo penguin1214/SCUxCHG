@@ -16,6 +16,7 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - DownPicker (0.1.34)
   - JSONModel (1.2.0)
   - Masonry (1.0.0)
   - MBProgressHUD (0.9.2)
@@ -28,6 +29,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworkActivityLogger (from `https://github.com/AFNetworking/AFNetworkActivityLogger.git`, branch `3_0_0`)
   - AFNetworking (~> 3.0)
+  - DownPicker
   - JSONModel
   - Masonry
   - MBProgressHUD (~> 0.9.2)
@@ -47,12 +49,13 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFNetworkActivityLogger: e77f68d014becb33c4306a23f56a64906ff72670
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  DownPicker: c00ea63f08ae82116cc93d0eba74e86bf3d4c68e
   JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
   Masonry: b529bb169217897b6354d4b56b1fada6d475b13d
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   SDCycleScrollView: 806fedb9342ab03b58b84442f985517b42c7cbb7
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
 
-PODFILE CHECKSUM: 8e26c305c9e88cf52dfe0cf9538580e4252b558c
+PODFILE CHECKSUM: 0614104acca15bcf6bdd3320be9468698b5a715b
 
 COCOAPODS: 1.0.0
